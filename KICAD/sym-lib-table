@@ -1,0 +1,7 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "composants_chat_souris")(type "KiCad")(uri "${KIPRJMOD}/composants_chat_souris.kicad_sym")(options "")(descr ""))
+  (lib (name "STM32G070RBT6")(type "KiCad")(uri "${KIPRJMOD}/STM32G070RBT6/STM32G070RBT6.kicad_sym")(options "")(descr ""))
+  (lib (name "LTC1731ES8-8_4")(type "KiCad")(uri "${KIPRJMOD}/CHARGE_LTC1731ES8-8_4/LTC1731ES8-8_4.kicad_sym")(options "")(descr ""))
+  (lib (name "AP9211SA-AK-HAC-7")(type "KiCad")(uri "${KIPRJMOD}/PROTECT_AP9211SA-AK-HAC-7/AP9211SA-AK-HAC-7.kicad_sym")(options "")(descr ""))
+)
