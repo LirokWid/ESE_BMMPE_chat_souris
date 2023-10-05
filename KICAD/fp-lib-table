@@ -1,0 +1,4 @@
+(fp_lib_table
+  (version 7)
+  (lib (name "DCJack_footprint")(type "KiCad")(uri "${KIPRJMOD}/DCJack_footprint")(options "")(descr ""))
+)
