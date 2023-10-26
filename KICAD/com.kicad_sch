@@ -183,7 +183,7 @@
     (property "Datasheet" "" (at 135.89 77.47 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid f61e560c-fc83-44c1-ab98-6d416c943251))
+    (pin "1" (uuid e4b40cbb-175d-444c-9166-a294e760b821))
     (instances
       (project "kicad_chat-souris"
         (path "/b1ddc66d-dbe7-4cff-b97f-1f0ce7ceeee4/63d1225e-ee83-4c5c-82ff-c6e9c57c2395"
@@ -208,7 +208,7 @@
     (property "Datasheet" "" (at 135.89 74.93 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 0e0a83ea-d6ea-4a6e-b4d6-ad21f3292e63))
+    (pin "1" (uuid 00045dbd-2534-4c1d-80f7-ffa594d76592))
     (instances
       (project "kicad_chat-souris"
         (path "/b1ddc66d-dbe7-4cff-b97f-1f0ce7ceeee4/63d1225e-ee83-4c5c-82ff-c6e9c57c2395"
@@ -227,18 +227,18 @@
     (property "Value" "~" (at 153.67 69.85 0)
       (effects (font (size 1.27 1.27)))
     )
-    (property "Footprint" "Connector_PinSocket_2.54mm:PinSocket_1x07_P2.54mm_Horizontal" (at 153.67 69.85 0)
+    (property "Footprint" "Connector_PinSocket_2.54mm:PinSocket_1x06_P2.54mm_Vertical" (at 153.67 69.85 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "" (at 153.67 69.85 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 5f3e0597-ff89-4943-993e-5376e9e32c43))
-    (pin "2" (uuid f4463543-7318-46b7-b22e-4f0801ac9ae7))
-    (pin "3" (uuid 726f3553-3e29-41ce-b44b-9bfe818f4b82))
-    (pin "4" (uuid 95de0962-1868-4db6-8c3d-636b323d4c4f))
-    (pin "5" (uuid 7a578b78-3ca2-4b0f-b1e9-c2cbaf56d3b5))
-    (pin "6" (uuid 95fac5a5-43a3-4bfe-a291-c8f253212d76))
+    (pin "1" (uuid 19c4b831-4899-4fab-b2f0-efa832acf91b))
+    (pin "2" (uuid ec86b738-d9a9-45ca-8814-fddc86c46f8a))
+    (pin "3" (uuid 008b28df-4266-4703-897b-179289a2d8d6))
+    (pin "4" (uuid d67d8604-151d-426a-82fa-b7b26c004700))
+    (pin "5" (uuid 79426ba1-065c-4bd6-b65a-f3bf67bf7139))
+    (pin "6" (uuid 3ec7849c-55f7-4ec8-bab8-051005d50fcc))
     (instances
       (project "kicad_chat-souris"
         (path "/b1ddc66d-dbe7-4cff-b97f-1f0ce7ceeee4/63d1225e-ee83-4c5c-82ff-c6e9c57c2395"

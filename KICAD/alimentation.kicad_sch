@@ -5,6 +5,50 @@
   (paper "A4")
 
   (lib_symbols
+    (symbol "Connector:Conn_01x01_Pin" (pin_names (offset 1.016) hide) (in_bom yes) (on_board yes)
+      (property "Reference" "J" (at 0 2.54 0)
+        (effects (font (size 1.27 1.27)))
+      )
+      (property "Value" "Conn_01x01_Pin" (at 0 -2.54 0)
+        (effects (font (size 1.27 1.27)))
+      )
+      (property "Footprint" "" (at 0 0 0)
+        (effects (font (size 1.27 1.27)) hide)
+      )
+      (property "Datasheet" "~" (at 0 0 0)
+        (effects (font (size 1.27 1.27)) hide)
+      )
+      (property "ki_locked" "" (at 0 0 0)
+        (effects (font (size 1.27 1.27)))
+      )
+      (property "ki_keywords" "connector" (at 0 0 0)
+        (effects (font (size 1.27 1.27)) hide)
+      )
+      (property "ki_description" "Generic connector, single row, 01x01, script generated" (at 0 0 0)
+        (effects (font (size 1.27 1.27)) hide)
+      )
+      (property "ki_fp_filters" "Connector*:*_1x??_*" (at 0 0 0)
+        (effects (font (size 1.27 1.27)) hide)
+      )
+      (symbol "Conn_01x01_Pin_1_1"
+        (polyline
+          (pts
+            (xy 1.27 0)
+            (xy 0.8636 0)
+          )
+          (stroke (width 0.1524) (type default))
+          (fill (type none))
+        )
+        (rectangle (start 0.8636 0.127) (end 0 -0.127)
+          (stroke (width 0.1524) (type default))
+          (fill (type outline))
+        )
+        (pin passive line (at 5.08 0 180) (length 3.81)
+          (name "Pin_1" (effects (font (size 1.27 1.27))))
+          (number "1" (effects (font (size 1.27 1.27))))
+        )
+      )
+    )
     (symbol "Connector_Generic:Conn_01x03" (pin_names (offset 1.016) hide) (in_bom yes) (on_board yes)
       (property "Reference" "J" (at 0 5.08 0)
         (effects (font (size 1.27 1.27)))
@@ -638,17 +682,29 @@
   (junction (at 199.39 91.44) (diameter 0) (color 0 0 0 0)
     (uuid 0d8d6910-b692-4b51-a565-15ca7adb7af1)
   )
+  (junction (at 224.79 128.27) (diameter 0) (color 0 0 0 0)
+    (uuid 14b93ac6-fb8b-4eaa-bbb2-aed44f6b033b)
+  )
   (junction (at 90.17 105.41) (diameter 0) (color 0 0 0 0)
     (uuid 27308d08-07f2-43d8-bb57-688fac0fc96c)
   )
+  (junction (at 199.39 128.27) (diameter 0) (color 0 0 0 0)
+    (uuid 2a5535f1-9b62-4d8b-b9d9-6d553843e776)
+  )
   (junction (at 149.86 116.84) (diameter 0) (color 0 0 0 0)
     (uuid 3ef6f4d3-7865-40f7-8973-d30ea660eccd)
+  )
+  (junction (at 212.09 128.27) (diameter 0) (color 0 0 0 0)
+    (uuid 4aba1f40-5550-49b1-960e-3ebba22b7b3c)
   )
   (junction (at 143.51 102.87) (diameter 0) (color 0 0 0 0)
     (uuid 50c53527-659d-48b8-b3fb-a891c0ef5877)
   )
   (junction (at 83.82 88.9) (diameter 0) (color 0 0 0 0)
     (uuid 623c7da4-3dfd-4088-bc71-c9fa5633ba67)
+  )
+  (junction (at 212.09 146.05) (diameter 0) (color 0 0 0 0)
+    (uuid 6fa2d7c4-2a42-4e9f-9122-728fb1871cc1)
   )
   (junction (at 100.33 52.07) (diameter 0) (color 0 0 0 0)
     (uuid 70518144-1858-438d-96de-529a254a9fe8)
@@ -674,8 +730,8 @@
   (junction (at 168.91 102.87) (diameter 0) (color 0 0 0 0)
     (uuid 9ea3f1fd-aff4-4ebe-bfa6-66a300b9ca42)
   )
-  (junction (at 187.96 116.84) (diameter 0) (color 0 0 0 0)
-    (uuid cd84d2ed-1df4-4258-a36b-890a3d940c82)
+  (junction (at 224.79 146.05) (diameter 0) (color 0 0 0 0)
+    (uuid a735e0fe-cbf0-4951-bb34-810e12e2caea)
   )
   (junction (at 229.87 88.9) (diameter 0) (color 0 0 0 0)
     (uuid e346c729-f092-4aaf-85ba-bf7189549c1b)
@@ -698,6 +754,10 @@
     (stroke (width 0) (type default))
     (uuid 0f6cee25-7ebe-4be8-bcda-a5c11ac07323)
   )
+  (wire (pts (xy 224.79 135.89) (xy 224.79 138.43))
+    (stroke (width 0) (type default))
+    (uuid 10ccee17-0dbc-4a39-9053-6c5ed1c8fe8f)
+  )
   (wire (pts (xy 166.37 116.84) (xy 187.96 116.84))
     (stroke (width 0) (type default))
     (uuid 139a7b01-e2e9-4dac-8418-6cf1c871768d)
@@ -714,6 +774,14 @@
     (stroke (width 0) (type default))
     (uuid 1918b32f-1019-447f-8215-bb4c633d32b3)
   )
+  (wire (pts (xy 198.12 128.27) (xy 199.39 128.27))
+    (stroke (width 0) (type default))
+    (uuid 19f978c4-6669-4d46-a5bb-744a6a9e53a6)
+  )
+  (wire (pts (xy 212.09 125.73) (xy 212.09 128.27))
+    (stroke (width 0) (type default))
+    (uuid 1f071277-cf08-4e86-b617-5ac8dac2415a)
+  )
   (wire (pts (xy 127 102.87) (xy 143.51 102.87))
     (stroke (width 0) (type default))
     (uuid 22dcff40-20e8-469f-a492-6bc9c8f7c9a5)
@@ -726,9 +794,17 @@
     (stroke (width 0) (type default))
     (uuid 29571c56-57aa-439c-8f72-0a3f640587d7)
   )
+  (wire (pts (xy 199.39 128.27) (xy 199.39 130.81))
+    (stroke (width 0) (type default))
+    (uuid 2a743432-652e-41e4-8436-55ce9f4445d2)
+  )
   (wire (pts (xy 199.39 88.9) (xy 199.39 83.82))
     (stroke (width 0) (type default))
     (uuid 2d38da61-f1f1-41e8-90d4-abcaaec762d2)
+  )
+  (wire (pts (xy 223.52 128.27) (xy 224.79 128.27))
+    (stroke (width 0) (type default))
+    (uuid 34cd79e9-a924-469d-bfe1-13eb58698d5c)
   )
   (wire (pts (xy 179.07 102.87) (xy 187.96 102.87))
     (stroke (width 0) (type default))
@@ -778,9 +854,13 @@
     (stroke (width 0) (type default))
     (uuid 4eebe7e9-28de-4f0d-8ff4-79c985cd69bc)
   )
-  (wire (pts (xy 187.96 116.84) (xy 187.96 120.65))
+  (wire (pts (xy 224.79 128.27) (xy 224.79 130.81))
     (stroke (width 0) (type default))
-    (uuid 51c77e5c-9cbf-4c6f-b49f-d63f259abe1d)
+    (uuid 521b2bb2-7a85-4279-b8e0-a69e68de2b76)
+  )
+  (wire (pts (xy 212.09 146.05) (xy 212.09 147.32))
+    (stroke (width 0) (type default))
+    (uuid 58795d8c-cad7-4289-a51a-84b7b87c90f6)
   )
   (wire (pts (xy 120.65 52.07) (xy 149.86 52.07))
     (stroke (width 0) (type default))
@@ -789,6 +869,10 @@
   (wire (pts (xy 187.96 102.87) (xy 187.96 83.82))
     (stroke (width 0) (type default))
     (uuid 5b9fa31d-529b-44ff-8aa8-0014b17c362d)
+  )
+  (wire (pts (xy 224.79 143.51) (xy 224.79 146.05))
+    (stroke (width 0) (type default))
+    (uuid 5d660a6c-8c50-40c2-a24d-d03872901894)
   )
   (wire (pts (xy 83.82 105.41) (xy 90.17 105.41))
     (stroke (width 0) (type default))
@@ -801,6 +885,10 @@
   (wire (pts (xy 83.82 93.98) (xy 93.98 93.98))
     (stroke (width 0) (type default))
     (uuid 67b4d3f7-7dfa-4c21-b7d7-7e7e88c0c08c)
+  )
+  (wire (pts (xy 224.79 125.73) (xy 224.79 128.27))
+    (stroke (width 0) (type default))
+    (uuid 689ac7d5-de16-4f04-bc63-1d04098c2982)
   )
   (wire (pts (xy 205.74 91.44) (xy 199.39 91.44))
     (stroke (width 0) (type default))
@@ -822,13 +910,21 @@
     (stroke (width 0) (type default))
     (uuid 752cd127-bbe5-4bfa-9bc9-7d55f471d9cf)
   )
-  (wire (pts (xy 187.96 127) (xy 187.96 125.73))
+  (wire (pts (xy 199.39 138.43) (xy 199.39 135.89))
     (stroke (width 0) (type default))
     (uuid 7b034a10-edc8-401b-aa98-be0f0c6cf386)
+  )
+  (wire (pts (xy 210.82 128.27) (xy 212.09 128.27))
+    (stroke (width 0) (type default))
+    (uuid 806789e5-e5f6-45bc-b361-949ab57d2892)
   )
   (wire (pts (xy 149.86 116.84) (xy 149.86 121.92))
     (stroke (width 0) (type default))
     (uuid 817746f7-1e6f-465e-afdc-912eea3b4740)
+  )
+  (wire (pts (xy 199.39 143.51) (xy 199.39 146.05))
+    (stroke (width 0) (type default))
+    (uuid 9031e3df-e805-465f-aa79-2dd08cc68b7f)
   )
   (wire (pts (xy 99.06 110.49) (xy 101.6 110.49))
     (stroke (width 0) (type default))
@@ -837,6 +933,10 @@
   (wire (pts (xy 127 95.25) (xy 129.54 95.25))
     (stroke (width 0) (type default))
     (uuid a2e026b7-3f7e-4dfa-aa76-7a070c7ed8fa)
+  )
+  (wire (pts (xy 212.09 135.89) (xy 212.09 138.43))
+    (stroke (width 0) (type default))
+    (uuid a3a6d63c-f2f3-4753-adce-4d54457c5885)
   )
   (wire (pts (xy 158.75 102.87) (xy 168.91 102.87))
     (stroke (width 0) (type default))
@@ -866,6 +966,10 @@
     (stroke (width 0) (type default))
     (uuid b9ebedc9-73e3-423f-8ed9-61b0f9cd6723)
   )
+  (wire (pts (xy 212.09 128.27) (xy 212.09 130.81))
+    (stroke (width 0) (type default))
+    (uuid bac311c5-51a7-45d8-bed2-8e4076b465a2)
+  )
   (wire (pts (xy 156.21 116.84) (xy 149.86 116.84))
     (stroke (width 0) (type default))
     (uuid c4c8e47d-1e28-469d-b4cd-c0db2ef3cd8f)
@@ -886,9 +990,17 @@
     (stroke (width 0) (type default))
     (uuid d2e98707-4632-4ec3-bfa4-c9f9c070af2b)
   )
+  (wire (pts (xy 199.39 125.73) (xy 199.39 128.27))
+    (stroke (width 0) (type default))
+    (uuid daae53c1-d3ec-487e-8ff3-45475fbe2867)
+  )
   (wire (pts (xy 146.05 116.84) (xy 149.86 116.84))
     (stroke (width 0) (type default))
     (uuid df7c5b51-7b5f-4150-90ea-2be71a0294b4)
+  )
+  (wire (pts (xy 212.09 146.05) (xy 224.79 146.05))
+    (stroke (width 0) (type default))
+    (uuid e1f8971e-7b6d-44c8-a885-73e7f24f9f02)
   )
   (wire (pts (xy 161.29 116.84) (xy 166.37 116.84))
     (stroke (width 0) (type default))
@@ -910,9 +1022,25 @@
     (stroke (width 0) (type default))
     (uuid f10dafae-4ab2-43de-a65c-51c18176a220)
   )
+  (wire (pts (xy 236.22 146.05) (xy 236.22 128.27))
+    (stroke (width 0) (type default))
+    (uuid f1d77006-1685-4f12-a209-8400985f7800)
+  )
   (wire (pts (xy 72.39 85.09) (xy 72.39 88.9))
     (stroke (width 0) (type default))
     (uuid f39dea7f-c612-4e48-991e-5fa932f59e81)
+  )
+  (wire (pts (xy 212.09 143.51) (xy 212.09 146.05))
+    (stroke (width 0) (type default))
+    (uuid f3a5e185-9827-42d6-b8a4-1387f3e3b4e6)
+  )
+  (wire (pts (xy 212.09 146.05) (xy 199.39 146.05))
+    (stroke (width 0) (type default))
+    (uuid f6026114-05be-44d2-a4e2-d6c985dd4ea6)
+  )
+  (wire (pts (xy 224.79 146.05) (xy 236.22 146.05))
+    (stroke (width 0) (type default))
+    (uuid f8c672d7-3178-48b8-98b2-b6c057bc2773)
   )
   (wire (pts (xy 205.74 88.9) (xy 199.39 88.9))
     (stroke (width 0) (type default))
@@ -945,9 +1073,18 @@
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid d6088f81-d718-47f9-8aa4-13ebcc8c1bbf)
   )
-  (text "5V  Power status led\n" (at 184.15 120.65 0)
+  (text "Power status led\n" (at 204.47 119.38 0)
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid f0ac8e31-2c2b-4ced-9377-845006e136bb)
+  )
+
+  (label "BUCK_FB" (at 128.27 110.49 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27)) (justify left bottom))
+    (uuid 3767783f-f9ed-419a-98d7-e1806c2c4bb2)
+  )
+  (label "BUCK_SW" (at 128.27 102.87 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27)) (justify left bottom))
+    (uuid 48f6df2f-3a44-46ad-95be-20814a78b855)
   )
 
   (symbol (lib_id "composants_chat_souris:MP1465") (at 114.3 102.87 0) (unit 1)
@@ -965,18 +1102,52 @@
     (property "Datasheet" "https://www.farnell.com/datasheets/2915024.pdf" (at 115.57 86.36 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 7d055df6-9b4a-4abd-8b32-db2bba5424b9))
-    (pin "2" (uuid b7a4398f-b804-4a1d-89f0-7b7a8b5791ca))
-    (pin "3" (uuid d7e73197-efce-4ed7-8e53-9ca12b332223))
-    (pin "4" (uuid 13ab9189-ac27-4359-be9d-68b072a050ba))
-    (pin "5" (uuid a6f0e04b-17fd-48ad-b296-25f58daa820f))
-    (pin "6" (uuid 59a7b72a-68ff-4b65-960c-9b6cb8f9f092))
-    (pin "7" (uuid 59ab640b-b306-43bd-b46e-d49bfff11af2))
-    (pin "8" (uuid 04ad619a-3cc4-4450-94a0-b8f629c43d50))
+    (pin "1" (uuid f05aaab3-5fc2-4172-ab74-5293dcaa2b2d))
+    (pin "2" (uuid f404c632-ccb8-41f8-beae-83bc02bed742))
+    (pin "3" (uuid bc3acb62-fa7d-4258-947f-b5e61a061cac))
+    (pin "4" (uuid aa1ac06d-2c43-403e-b43f-e8c1c0c6fa34))
+    (pin "5" (uuid 9051d981-bba7-4ae9-848d-9643fcc251cc))
+    (pin "6" (uuid 84236671-a95f-44db-8a52-5482ea622c7d))
+    (pin "7" (uuid 322a610b-fb4c-4e32-a594-f8e2d2c7d494))
+    (pin "8" (uuid e4d34441-1ba6-4db5-afe5-328fb44863e1))
     (instances
       (project "kicad_chat-souris"
         (path "/b1ddc66d-dbe7-4cff-b97f-1f0ce7ceeee4/6a44a42c-5fbe-4248-b986-7ff99c499b51"
           (reference "U301") (unit 1)
+        )
+      )
+    )
+  )
+
+  (symbol (lib_id "Device:LED_Small") (at 212.09 133.35 90) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no)
+    (uuid 13ce5b47-7241-450a-9108-0384ec16769f)
+    (property "Reference" "D602" (at 208.28 132.08 90)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Value" "blue" (at 214.63 133.35 0)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Footprint" "LED_SMD:LED_0603_1608Metric" (at 212.09 133.35 90)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "~" (at 212.09 133.35 90)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid cdbeae49-d382-4010-8a80-140075d899d3))
+    (pin "2" (uuid e80a7c6e-8861-48cf-825e-5b3e5f3dc6ce))
+    (instances
+      (project "projet"
+        (path "/72843e5b-039f-43c6-ac6b-21bc38672670/3a7e19ea-ce35-4a7a-ac90-3d945470fc6b"
+          (reference "D602") (unit 1)
+        )
+      )
+      (project "kicad_chat-souris"
+        (path "/b1ddc66d-dbe7-4cff-b97f-1f0ce7ceeee4/a13fe5f2-f6e5-4a93-b768-5d6eb675b5fa"
+          (reference "D201") (unit 1)
+        )
+        (path "/b1ddc66d-dbe7-4cff-b97f-1f0ce7ceeee4/6a44a42c-5fbe-4248-b986-7ff99c499b51"
+          (reference "D302") (unit 1)
         )
       )
     )
@@ -997,8 +1168,8 @@
     (property "Datasheet" "~" (at 158.75 116.84 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid cf50814b-0990-4e07-8ec7-4253c3e9eb98))
-    (pin "2" (uuid 1f71c0ed-cd53-4f48-822a-132f0d921124))
+    (pin "1" (uuid 16344ee0-6ad5-47aa-a2e1-0ae88d14e14c))
+    (pin "2" (uuid ef623252-e948-4e72-a11a-0ff5e17cb3ea))
     (instances
       (project "kicad_chat-souris"
         (path "/b1ddc66d-dbe7-4cff-b97f-1f0ce7ceeee4/6a44a42c-5fbe-4248-b986-7ff99c499b51"
@@ -1023,8 +1194,8 @@
     (property "Datasheet" "~" (at 143.51 99.06 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 54b5f92e-64d4-4600-9010-04fe6beccfd4))
-    (pin "2" (uuid fe4fc84d-09a2-4160-96f7-7fcdb0b2636d))
+    (pin "1" (uuid b4d5f06c-8be6-41f3-a44d-ace48600017f))
+    (pin "2" (uuid 8dfd818b-3111-4861-9ec2-fdee8f666a81))
     (instances
       (project "kicad_chat-souris"
         (path "/b1ddc66d-dbe7-4cff-b97f-1f0ce7ceeee4/6a44a42c-5fbe-4248-b986-7ff99c499b51"
@@ -1049,8 +1220,8 @@
     (property "Datasheet" "~" (at 83.82 91.44 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 889307a2-72a1-4d61-8fcc-7c4d3d1871f6))
-    (pin "2" (uuid 124f98a2-a3f7-42f0-bd33-85d4fcdf8575))
+    (pin "1" (uuid dcec9b55-cab4-442f-a169-8de16293feac))
+    (pin "2" (uuid 09f7ccf2-2d42-4842-9c55-cae876c00937))
     (instances
       (project "kicad_chat-souris"
         (path "/b1ddc66d-dbe7-4cff-b97f-1f0ce7ceeee4/6a44a42c-5fbe-4248-b986-7ff99c499b51"
@@ -1075,11 +1246,36 @@
     (property "Datasheet" "" (at 72.39 85.09 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 7b0bdf15-0722-4fc5-979d-af72838349c5))
+    (pin "1" (uuid e0045d69-f4c8-48f4-addd-84a272e20f34))
     (instances
       (project "kicad_chat-souris"
         (path "/b1ddc66d-dbe7-4cff-b97f-1f0ce7ceeee4/6a44a42c-5fbe-4248-b986-7ff99c499b51"
           (reference "#PWR0301") (unit 1)
+        )
+      )
+    )
+  )
+
+  (symbol (lib_id "Connector:Conn_01x01_Pin") (at 193.04 128.27 0) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
+    (uuid 2e33d1cc-ac18-48d0-b50b-c8f19efc5a11)
+    (property "Reference" "J302" (at 193.675 123.19 0)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Value" "3V3" (at 193.675 125.73 0)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical" (at 193.04 128.27 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "~" (at 193.04 128.27 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid 33af281a-cfc3-44df-8ebe-932b9f0b8650))
+    (instances
+      (project "kicad_chat-souris"
+        (path "/b1ddc66d-dbe7-4cff-b97f-1f0ce7ceeee4/6a44a42c-5fbe-4248-b986-7ff99c499b51"
+          (reference "J302") (unit 1)
         )
       )
     )
@@ -1100,7 +1296,7 @@
     (property "Datasheet" "~" (at 187.96 102.87 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 8fc2ce39-abeb-4fd5-b735-59ab1580e5fb))
+    (pin "1" (uuid 44b6dcd6-e037-400f-975a-ef77677a20fa))
     (instances
       (project "kicad_chat-souris"
         (path "/b1ddc66d-dbe7-4cff-b97f-1f0ce7ceeee4/6a44a42c-5fbe-4248-b986-7ff99c499b51"
@@ -1125,12 +1321,37 @@
     (property "Datasheet" "~" (at 179.07 105.41 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 7c41457c-d2f7-44b4-9a91-b8ff7960df44))
-    (pin "2" (uuid 79fc3c05-713a-4f82-929a-1103391468c0))
+    (pin "1" (uuid 78d4960f-ee83-4d4d-beb5-1cb449baefe2))
+    (pin "2" (uuid 3176e73f-a810-4ea8-a71c-68c9f6b32f07))
     (instances
       (project "kicad_chat-souris"
         (path "/b1ddc66d-dbe7-4cff-b97f-1f0ce7ceeee4/6a44a42c-5fbe-4248-b986-7ff99c499b51"
           (reference "C307") (unit 1)
+        )
+      )
+    )
+  )
+
+  (symbol (lib_id "power:+BATT") (at 224.79 125.73 0) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
+    (uuid 4b9edb75-17dd-4d49-a18f-dbe16bdb50ac)
+    (property "Reference" "#PWR0315" (at 224.79 129.54 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Value" "+BATT" (at 224.79 120.65 0)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Footprint" "" (at 224.79 125.73 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "" (at 224.79 125.73 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid cc0a68a7-f3bd-4934-940f-af7662849c80))
+    (instances
+      (project "kicad_chat-souris"
+        (path "/b1ddc66d-dbe7-4cff-b97f-1f0ce7ceeee4/6a44a42c-5fbe-4248-b986-7ff99c499b51"
+          (reference "#PWR0315") (unit 1)
         )
       )
     )
@@ -1151,11 +1372,11 @@
     (property "Datasheet" "https://ww1.microchip.com/downloads/aemDocuments/documents/OTH/ProductDocuments/DataSheets/MIC5317-High-Performance-Single-150mA-LDO-DS20006195B.pdf" (at 205.74 71.12 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid b80b2bb2-03fe-4ed1-b512-26e06c1fd1f9))
-    (pin "2" (uuid 76367210-cc62-4137-8379-85e9d9b1bcad))
-    (pin "3" (uuid 289fb7da-dd00-4046-aac2-7d719a6f6128))
-    (pin "4" (uuid 35f05aa5-aa9a-4494-968f-592c5d7c10bc))
-    (pin "5" (uuid a6aac3bb-5fa4-4790-9f06-702f1bc8b43a))
+    (pin "1" (uuid ffb4195f-01aa-4884-bef0-5f7279b4a8d1))
+    (pin "2" (uuid e3e5d3a3-2c0a-41e1-9e6f-1b2d8df6d396))
+    (pin "3" (uuid f7ce4394-67c2-4cba-897b-981b891fe174))
+    (pin "4" (uuid acd07a40-14ed-4e5c-a036-b3f2b273d32e))
+    (pin "5" (uuid e9b48dd2-5dbe-46a7-88c6-0025cf77d0ec))
     (instances
       (project "kicad_chat-souris"
         (path "/b1ddc66d-dbe7-4cff-b97f-1f0ce7ceeee4/6a44a42c-5fbe-4248-b986-7ff99c499b51"
@@ -1180,8 +1401,8 @@
     (property "Datasheet" "~" (at 168.91 105.41 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid d5d0b2f4-4c8d-43a1-96a7-5931b4a1b3ba))
-    (pin "2" (uuid 9d0a13bc-4840-4b40-8145-037856955830))
+    (pin "1" (uuid b7b9d3ec-3d4d-42f7-9dbd-8c4525c194db))
+    (pin "2" (uuid 2ac1b7b0-f9ce-447f-8226-6c435d006a13))
     (instances
       (project "kicad_chat-souris"
         (path "/b1ddc66d-dbe7-4cff-b97f-1f0ce7ceeee4/6a44a42c-5fbe-4248-b986-7ff99c499b51"
@@ -1206,7 +1427,7 @@
     (property "Datasheet" "~" (at 114.3 116.84 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid d34de591-664f-4902-bca8-8129eddba130))
+    (pin "1" (uuid bc3f910f-a1f2-47f8-a278-006b16f7697c))
     (instances
       (project "kicad_chat-souris"
         (path "/b1ddc66d-dbe7-4cff-b97f-1f0ce7ceeee4/6a44a42c-5fbe-4248-b986-7ff99c499b51"
@@ -1231,7 +1452,7 @@
     (property "Datasheet" "" (at 149.86 132.08 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 04a7a21f-4916-4475-a98e-c1f1518af725))
+    (pin "1" (uuid d43f7540-1d92-455e-be5e-5cef93eaff7b))
     (instances
       (project "kicad_chat-souris"
         (path "/b1ddc66d-dbe7-4cff-b97f-1f0ce7ceeee4/6a44a42c-5fbe-4248-b986-7ff99c499b51"
@@ -1256,11 +1477,45 @@
     (property "Datasheet" "" (at 83.82 110.49 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 5dd781fb-273f-46a2-a2d7-fc6b47182e3d))
+    (pin "1" (uuid 239642d4-3cdd-4959-8b51-67baa1b54b0a))
     (instances
       (project "kicad_chat-souris"
         (path "/b1ddc66d-dbe7-4cff-b97f-1f0ce7ceeee4/6a44a42c-5fbe-4248-b986-7ff99c499b51"
           (reference "#PWR0303") (unit 1)
+        )
+      )
+    )
+  )
+
+  (symbol (lib_id "Device:LED_Small") (at 224.79 133.35 90) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no)
+    (uuid 5a981fca-7529-4a98-8a2f-31e0d7c0bca3)
+    (property "Reference" "D602" (at 220.98 132.08 90)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Value" "blue" (at 227.33 133.35 0)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Footprint" "LED_SMD:LED_0603_1608Metric" (at 224.79 133.35 90)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "~" (at 224.79 133.35 90)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid 2e6f2846-6be2-4d34-afaf-0b38e9f1ad07))
+    (pin "2" (uuid 28dc01c2-9d6b-4916-b071-11b8f3f805dd))
+    (instances
+      (project "projet"
+        (path "/72843e5b-039f-43c6-ac6b-21bc38672670/3a7e19ea-ce35-4a7a-ac90-3d945470fc6b"
+          (reference "D602") (unit 1)
+        )
+      )
+      (project "kicad_chat-souris"
+        (path "/b1ddc66d-dbe7-4cff-b97f-1f0ce7ceeee4/a13fe5f2-f6e5-4a93-b768-5d6eb675b5fa"
+          (reference "D201") (unit 1)
+        )
+        (path "/b1ddc66d-dbe7-4cff-b97f-1f0ce7ceeee4/6a44a42c-5fbe-4248-b986-7ff99c499b51"
+          (reference "D303") (unit 1)
         )
       )
     )
@@ -1281,7 +1536,7 @@
     (property "Datasheet" "" (at 229.87 83.82 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 4faee2ea-e095-4bac-9432-ae568e318fcb))
+    (pin "1" (uuid 112487cd-3580-4769-b7f4-9b2e257b6d5b))
     (instances
       (project "kicad_chat-souris"
         (path "/b1ddc66d-dbe7-4cff-b97f-1f0ce7ceeee4/6a44a42c-5fbe-4248-b986-7ff99c499b51"
@@ -1306,7 +1561,7 @@
     (property "Datasheet" "" (at 199.39 83.82 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid f462a2d5-6ffb-40f0-8e30-00068e2dd740))
+    (pin "1" (uuid 91b79d1b-640a-48e9-ac76-ed5b53025edf))
     (instances
       (project "kicad_chat-souris"
         (path "/b1ddc66d-dbe7-4cff-b97f-1f0ce7ceeee4/6a44a42c-5fbe-4248-b986-7ff99c499b51"
@@ -1331,8 +1586,8 @@
     (property "Datasheet" "~" (at 143.51 116.84 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 4e645e3d-d152-4551-88c4-9a0e28c2cecf))
-    (pin "2" (uuid b6a01562-118e-44f5-8048-9ec2e2a18441))
+    (pin "1" (uuid 232d7cc4-1015-42c4-bb6c-605b3a064a87))
+    (pin "2" (uuid ee818bda-46a2-4e41-a91d-80076dbb10c4))
     (instances
       (project "kicad_chat-souris"
         (path "/b1ddc66d-dbe7-4cff-b97f-1f0ce7ceeee4/6a44a42c-5fbe-4248-b986-7ff99c499b51"
@@ -1357,8 +1612,8 @@
     (property "Datasheet" "~" (at 229.87 96.52 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 54f4e1b2-844d-4d88-b991-89b3cf9dea29))
-    (pin "2" (uuid d5dffd53-93b1-4b31-ae99-5de2ce9f446e))
+    (pin "1" (uuid d0cb3eef-929a-426a-9934-227071aab96c))
+    (pin "2" (uuid e44c7856-5ead-42f2-8b8c-5c6e55996db9))
     (instances
       (project "kicad_chat-souris"
         (path "/b1ddc66d-dbe7-4cff-b97f-1f0ce7ceeee4/6a44a42c-5fbe-4248-b986-7ff99c499b51"
@@ -1383,7 +1638,7 @@
     (property "Datasheet" "" (at 100.33 48.26 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid ecd54cb0-935e-4e10-bebc-6801a65c5eaf))
+    (pin "1" (uuid bbad870c-601e-47be-8da9-0ad4f5807eb5))
     (instances
       (project "kicad_chat-souris"
         (path "/b1ddc66d-dbe7-4cff-b97f-1f0ce7ceeee4/6a44a42c-5fbe-4248-b986-7ff99c499b51"
@@ -1408,7 +1663,7 @@
     (property "Datasheet" "~" (at 100.33 52.07 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 22cb30b6-531b-44ca-9bef-1fd42155d6d5))
+    (pin "1" (uuid 76dde5bc-39a0-46a1-98fe-85dcfabbc691))
     (instances
       (project "kicad_chat-souris"
         (path "/b1ddc66d-dbe7-4cff-b97f-1f0ce7ceeee4/6a44a42c-5fbe-4248-b986-7ff99c499b51"
@@ -1418,22 +1673,22 @@
     )
   )
 
-  (symbol (lib_id "power:GND") (at 187.96 132.08 0) (unit 1)
+  (symbol (lib_id "power:GND") (at 212.09 147.32 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 886c339c-ee15-4d6c-aeea-b7d01620d6a8)
-    (property "Reference" "#PWR0602" (at 187.96 138.43 0)
+    (property "Reference" "#PWR0602" (at 212.09 153.67 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "Value" "GND" (at 187.96 137.16 0)
+    (property "Value" "GND" (at 212.09 152.4 0)
       (effects (font (size 1.27 1.27)))
     )
-    (property "Footprint" "" (at 187.96 132.08 0)
+    (property "Footprint" "" (at 212.09 147.32 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "Datasheet" "" (at 187.96 132.08 0)
+    (property "Datasheet" "" (at 212.09 147.32 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid fb6defb7-7c1d-4bf6-9889-c65ad61afc82))
+    (pin "1" (uuid 1b992df4-d92c-49b1-a2b1-d6cefebb8aff))
     (instances
       (project "projet"
         (path "/72843e5b-039f-43c6-ac6b-21bc38672670/3a7e19ea-ce35-4a7a-ac90-3d945470fc6b"
@@ -1466,8 +1721,8 @@
     (property "Datasheet" "~" (at 83.82 107.95 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 5c397c6e-b194-4aca-874d-1d1889fe1013))
-    (pin "2" (uuid 467cbbd6-c075-412c-914f-cd77aa3c0a5f))
+    (pin "1" (uuid 486c318e-b98e-491c-8f05-2604765dfc4e))
+    (pin "2" (uuid ffe780a9-3158-48a5-a888-0e16eeddc8aa))
     (instances
       (project "kicad_chat-souris"
         (path "/b1ddc66d-dbe7-4cff-b97f-1f0ce7ceeee4/6a44a42c-5fbe-4248-b986-7ff99c499b51"
@@ -1492,12 +1747,46 @@
     (property "Datasheet" "~" (at 132.08 95.25 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 1cf0081a-8601-4762-972d-f0681a37289a))
-    (pin "2" (uuid af54d88c-7f6c-4823-ada4-3d6ba73e8573))
+    (pin "1" (uuid 5e3b9378-7ed2-4ecd-9c7a-de4219531d39))
+    (pin "2" (uuid 0f0b43a7-98a1-43b3-97bf-d5dc3c669000))
     (instances
       (project "kicad_chat-souris"
         (path "/b1ddc66d-dbe7-4cff-b97f-1f0ce7ceeee4/6a44a42c-5fbe-4248-b986-7ff99c499b51"
           (reference "R303") (unit 1)
+        )
+      )
+    )
+  )
+
+  (symbol (lib_id "Device:R_Small") (at 212.09 140.97 0) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no)
+    (uuid 95f47803-132d-4c34-b84a-51a3cb6eeda2)
+    (property "Reference" "R602" (at 205.74 139.7 0)
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (property "Value" "50" (at 207.01 142.24 0)
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 212.09 140.97 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "~" (at 212.09 140.97 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid ab4940a8-763b-4833-b9e1-3cf0b4649685))
+    (pin "2" (uuid f1c0d74b-97bc-46c5-a21b-1faf7beef213))
+    (instances
+      (project "projet"
+        (path "/72843e5b-039f-43c6-ac6b-21bc38672670/3a7e19ea-ce35-4a7a-ac90-3d945470fc6b"
+          (reference "R602") (unit 1)
+        )
+      )
+      (project "kicad_chat-souris"
+        (path "/b1ddc66d-dbe7-4cff-b97f-1f0ce7ceeee4/a13fe5f2-f6e5-4a93-b768-5d6eb675b5fa"
+          (reference "R205") (unit 1)
+        )
+        (path "/b1ddc66d-dbe7-4cff-b97f-1f0ce7ceeee4/6a44a42c-5fbe-4248-b986-7ff99c499b51"
+          (reference "R308") (unit 1)
         )
       )
     )
@@ -1518,7 +1807,7 @@
     (property "Datasheet" "" (at 187.96 83.82 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 8e7d28e0-7a57-4ab6-9889-d9e99a679492))
+    (pin "1" (uuid cca7f766-087d-4819-9cc8-0452a8eb9b3f))
     (instances
       (project "kicad_chat-souris"
         (path "/b1ddc66d-dbe7-4cff-b97f-1f0ce7ceeee4/6a44a42c-5fbe-4248-b986-7ff99c499b51"
@@ -1543,8 +1832,8 @@
     (property "Datasheet" "~" (at 149.86 129.54 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 60869ee7-8617-4e7d-85e2-a618d6cb7cf3))
-    (pin "2" (uuid 7af1d012-72c8-4a16-ae5d-8eb4c9ee78a8))
+    (pin "1" (uuid af144e4a-3071-48f7-b79c-59cbc44e2785))
+    (pin "2" (uuid 09a32a60-7666-4d39-8b0f-646d8ea6dfb4))
     (instances
       (project "kicad_chat-souris"
         (path "/b1ddc66d-dbe7-4cff-b97f-1f0ce7ceeee4/6a44a42c-5fbe-4248-b986-7ff99c499b51"
@@ -1569,8 +1858,8 @@
     (property "Datasheet" "~" (at 156.21 102.87 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid afe80f4a-be7b-4d3a-a41d-da7ba9e02d73))
-    (pin "2" (uuid 9dd363ac-edbb-4330-8afd-6288760c3089))
+    (pin "1" (uuid dd589e5b-dea3-4018-ae09-d9e98043ee67))
+    (pin "2" (uuid c3ad2640-e5f1-4ac2-b171-b32cf4e20240))
     (instances
       (project "kicad_chat-souris"
         (path "/b1ddc66d-dbe7-4cff-b97f-1f0ce7ceeee4/6a44a42c-5fbe-4248-b986-7ff99c499b51"
@@ -1580,23 +1869,48 @@
     )
   )
 
-  (symbol (lib_id "Device:R_Small") (at 187.96 129.54 0) (unit 1)
+  (symbol (lib_id "power:+5V") (at 212.09 125.73 0) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
+    (uuid 9f10885f-5106-4ea5-8065-7e94b0063c49)
+    (property "Reference" "#PWR0314" (at 212.09 129.54 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Value" "+5V" (at 212.09 120.65 0)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Footprint" "" (at 212.09 125.73 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "" (at 212.09 125.73 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid c6d36c8d-6be4-4e13-b406-fd8a0bbca429))
+    (instances
+      (project "kicad_chat-souris"
+        (path "/b1ddc66d-dbe7-4cff-b97f-1f0ce7ceeee4/6a44a42c-5fbe-4248-b986-7ff99c499b51"
+          (reference "#PWR0314") (unit 1)
+        )
+      )
+    )
+  )
+
+  (symbol (lib_id "Device:R_Small") (at 199.39 140.97 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 9f6b3c10-4657-40f1-8bcf-9bb17056bac4)
-    (property "Reference" "R602" (at 181.61 128.27 0)
+    (property "Reference" "R602" (at 193.04 139.7 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Value" "100" (at 182.88 130.81 0)
+    (property "Value" "100" (at 194.31 142.24 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 187.96 129.54 0)
+    (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 199.39 140.97 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "Datasheet" "~" (at 187.96 129.54 0)
+    (property "Datasheet" "~" (at 199.39 140.97 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 96193fb5-8afa-4ec4-80bd-6ddfa5ea58f3))
-    (pin "2" (uuid be93a549-e1e1-450c-92b9-ec12ee122715))
+    (pin "1" (uuid fa82e401-9483-43f2-a62c-ae9ac32f87ea))
+    (pin "2" (uuid fb1cd352-1cbc-4229-b3f9-8b6c222e600a))
     (instances
       (project "projet"
         (path "/72843e5b-039f-43c6-ac6b-21bc38672670/3a7e19ea-ce35-4a7a-ac90-3d945470fc6b"
@@ -1629,7 +1943,7 @@
     (property "Datasheet" "" (at 168.91 107.95 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid a58eb7f2-8f67-4659-9183-c5c315ba045b))
+    (pin "1" (uuid 6a712daf-aa97-4b7b-9e12-12a07ceae414))
     (instances
       (project "kicad_chat-souris"
         (path "/b1ddc66d-dbe7-4cff-b97f-1f0ce7ceeee4/6a44a42c-5fbe-4248-b986-7ff99c499b51"
@@ -1639,23 +1953,73 @@
     )
   )
 
-  (symbol (lib_id "Device:LED_Small") (at 187.96 123.19 90) (unit 1)
+  (symbol (lib_id "power:+3V3") (at 199.39 125.73 0) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
+    (uuid ad68484c-7927-41ff-83d9-5c8c6aa45937)
+    (property "Reference" "#PWR0313" (at 199.39 129.54 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Value" "+3V3" (at 199.39 120.65 0)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Footprint" "" (at 199.39 125.73 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "" (at 199.39 125.73 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid 48403110-4892-4031-b9e2-b74e23b2224a))
+    (instances
+      (project "kicad_chat-souris"
+        (path "/b1ddc66d-dbe7-4cff-b97f-1f0ce7ceeee4/6a44a42c-5fbe-4248-b986-7ff99c499b51"
+          (reference "#PWR0313") (unit 1)
+        )
+      )
+    )
+  )
+
+  (symbol (lib_id "Connector:Conn_01x01_Pin") (at 231.14 128.27 0) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
+    (uuid b919ec71-7c63-41a8-b73c-33f385e7bc03)
+    (property "Reference" "J305" (at 231.775 123.19 0)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Value" "GND" (at 231.775 125.73 0)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical" (at 231.14 128.27 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "~" (at 231.14 128.27 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid 00104326-c374-40c2-acfe-6989ebb99118))
+    (instances
+      (project "kicad_chat-souris"
+        (path "/b1ddc66d-dbe7-4cff-b97f-1f0ce7ceeee4/6a44a42c-5fbe-4248-b986-7ff99c499b51"
+          (reference "J305") (unit 1)
+        )
+      )
+    )
+  )
+
+  (symbol (lib_id "Device:LED_Small") (at 199.39 133.35 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid c1ac678b-4b8d-456f-9e45-f6a4d297f637)
-    (property "Reference" "D602" (at 184.15 121.92 90)
+    (property "Reference" "D602" (at 195.58 132.08 90)
       (effects (font (size 1.27 1.27)))
     )
-    (property "Value" "blue" (at 190.5 123.19 0)
+    (property "Value" "blue" (at 201.93 133.35 0)
       (effects (font (size 1.27 1.27)))
     )
-    (property "Footprint" "LED_SMD:LED_0603_1608Metric" (at 187.96 123.19 90)
+    (property "Footprint" "LED_SMD:LED_0603_1608Metric" (at 199.39 133.35 90)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "Datasheet" "~" (at 187.96 123.19 90)
+    (property "Datasheet" "~" (at 199.39 133.35 90)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid d212b557-99fe-421e-9cab-564319f7746c))
-    (pin "2" (uuid 15f22209-5d42-4cd5-9c76-beabd44772e9))
+    (pin "1" (uuid 964dd731-c162-4b34-ba1a-5087e0ecdbd0))
+    (pin "2" (uuid b863a863-8ca5-4bde-b981-2ee60d278aaa))
     (instances
       (project "projet"
         (path "/72843e5b-039f-43c6-ac6b-21bc38672670/3a7e19ea-ce35-4a7a-ac90-3d945470fc6b"
@@ -1688,7 +2052,7 @@
     (property "Datasheet" "" (at 83.82 93.98 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 806f3c15-419c-496d-9a21-5687b7bcde82))
+    (pin "1" (uuid ca2293d1-48b9-41ac-bbe5-46499b1fdf6e))
     (instances
       (project "kicad_chat-souris"
         (path "/b1ddc66d-dbe7-4cff-b97f-1f0ce7ceeee4/6a44a42c-5fbe-4248-b986-7ff99c499b51"
@@ -1713,7 +2077,7 @@
     (property "Datasheet" "" (at 213.36 105.41 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid d2cf66a9-d04e-49c4-89bd-f091a3d78f64))
+    (pin "1" (uuid 95376349-b7f6-40ec-a075-67371b437e7c))
     (instances
       (project "kicad_chat-souris"
         (path "/b1ddc66d-dbe7-4cff-b97f-1f0ce7ceeee4/6a44a42c-5fbe-4248-b986-7ff99c499b51"
@@ -1738,12 +2102,37 @@
     (property "Datasheet" "~" (at 96.52 110.49 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid ead2f05c-f4a9-45ae-a165-eb83faadc3bf))
-    (pin "2" (uuid 982a7616-8505-4b38-a4f7-a0c837b5cb4b))
+    (pin "1" (uuid 8e692c66-79ed-4b35-b295-12a22544a929))
+    (pin "2" (uuid 90ca0288-3e72-4818-8fd1-758d6393ddbb))
     (instances
       (project "kicad_chat-souris"
         (path "/b1ddc66d-dbe7-4cff-b97f-1f0ce7ceeee4/6a44a42c-5fbe-4248-b986-7ff99c499b51"
           (reference "R302") (unit 1)
+        )
+      )
+    )
+  )
+
+  (symbol (lib_id "Connector:Conn_01x01_Pin") (at 205.74 128.27 0) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
+    (uuid d4b57ee1-5819-4b8e-8f9b-1a9bd0b0f5e8)
+    (property "Reference" "J303" (at 206.375 123.19 0)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Value" "5V" (at 206.375 125.73 0)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical" (at 205.74 128.27 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "~" (at 205.74 128.27 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid d9db44b9-47d1-46de-8893-2c178eca6a9f))
+    (instances
+      (project "kicad_chat-souris"
+        (path "/b1ddc66d-dbe7-4cff-b97f-1f0ce7ceeee4/6a44a42c-5fbe-4248-b986-7ff99c499b51"
+          (reference "J303") (unit 1)
         )
       )
     )
@@ -1764,8 +2153,8 @@
     (property "Datasheet" "~" (at 93.98 91.44 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 00bdc17c-1d22-4340-b242-d630e7d0c70d))
-    (pin "2" (uuid fe50b295-8436-466c-9179-468c1d354def))
+    (pin "1" (uuid ae25e55f-33a0-4a3e-b0e5-eb55468df0f2))
+    (pin "2" (uuid 014ff87e-9ea6-45f3-9158-bb943c4fb0e2))
     (instances
       (project "kicad_chat-souris"
         (path "/b1ddc66d-dbe7-4cff-b97f-1f0ce7ceeee4/6a44a42c-5fbe-4248-b986-7ff99c499b51"
@@ -1790,8 +2179,8 @@
     (property "Datasheet" "~" (at 158.75 121.92 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid ff4f13af-8643-4542-b44f-10c9969d7292))
-    (pin "2" (uuid 9fe889de-33ee-4749-8657-05c75f7621ac))
+    (pin "1" (uuid a30db80b-ea4e-4813-822f-45e14eb914ca))
+    (pin "2" (uuid 66276f91-d3c9-4a76-a5a1-59b13acd5930))
     (instances
       (project "kicad_chat-souris"
         (path "/b1ddc66d-dbe7-4cff-b97f-1f0ce7ceeee4/6a44a42c-5fbe-4248-b986-7ff99c499b51"
@@ -1816,8 +2205,8 @@
     (property "Datasheet" "~" (at 96.52 100.33 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid d9412baa-8fdf-46d2-b360-735dddd956fe))
-    (pin "2" (uuid 73e2bb42-a914-4960-a93c-4b3c66e9b4a2))
+    (pin "1" (uuid beab97d1-4b47-43f7-9d84-3b8ca7e71c60))
+    (pin "2" (uuid abd491ac-e435-4138-a823-c27561900f30))
     (instances
       (project "kicad_chat-souris"
         (path "/b1ddc66d-dbe7-4cff-b97f-1f0ce7ceeee4/6a44a42c-5fbe-4248-b986-7ff99c499b51"
@@ -1842,8 +2231,8 @@
     (property "Datasheet" "~" (at 199.39 96.52 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 5f010f3b-5989-42d0-ad30-49ed51f824ad))
-    (pin "2" (uuid 7a725720-4d7d-40d3-a278-8e7a896221ba))
+    (pin "1" (uuid b69f50f2-24b2-4f07-b193-19ac3ede73ed))
+    (pin "2" (uuid a3eb0b2b-e2ec-4593-b4f7-eb51f77671e3))
     (instances
       (project "kicad_chat-souris"
         (path "/b1ddc66d-dbe7-4cff-b97f-1f0ce7ceeee4/6a44a42c-5fbe-4248-b986-7ff99c499b51"
@@ -1868,9 +2257,9 @@
     (property "Datasheet" "~" (at 118.11 44.45 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 64ec4b20-afa1-48fc-955a-351efd7d56d4))
-    (pin "2" (uuid 0136c595-24b8-4b64-a9ee-fb805d553c2d))
-    (pin "3" (uuid 27610c9d-f3d1-446a-aa8c-c0e1e02f9867))
+    (pin "1" (uuid bfebeff4-1faf-47ff-bcd0-fba92e7889e3))
+    (pin "2" (uuid 599c7b0f-be4b-4fab-b1fd-90792dee7f6d))
+    (pin "3" (uuid 506d9123-a9f6-49f3-90e6-9b4bb82b040e))
     (instances
       (project "kicad_chat-souris"
         (path "/b1ddc66d-dbe7-4cff-b97f-1f0ce7ceeee4/6a44a42c-5fbe-4248-b986-7ff99c499b51"
@@ -1895,11 +2284,70 @@
     (property "Datasheet" "" (at 114.3 119.38 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid dc0e67a6-d12f-4f9f-895e-b490392393a5))
+    (pin "1" (uuid 12291e43-ec23-4d69-ac7b-2aff1d6df63f))
     (instances
       (project "kicad_chat-souris"
         (path "/b1ddc66d-dbe7-4cff-b97f-1f0ce7ceeee4/6a44a42c-5fbe-4248-b986-7ff99c499b51"
           (reference "#PWR0305") (unit 1)
+        )
+      )
+    )
+  )
+
+  (symbol (lib_id "Connector:Conn_01x01_Pin") (at 218.44 128.27 0) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
+    (uuid f9755554-0b3d-4e42-95cc-d0b549b3a5b0)
+    (property "Reference" "J304" (at 219.075 123.19 0)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Value" "V_BAT" (at 219.075 125.73 0)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical" (at 218.44 128.27 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "~" (at 218.44 128.27 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid 82003d01-8c62-41c8-9b83-045a4b8fb09a))
+    (instances
+      (project "kicad_chat-souris"
+        (path "/b1ddc66d-dbe7-4cff-b97f-1f0ce7ceeee4/6a44a42c-5fbe-4248-b986-7ff99c499b51"
+          (reference "J304") (unit 1)
+        )
+      )
+    )
+  )
+
+  (symbol (lib_id "Device:R_Small") (at 224.79 140.97 0) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no)
+    (uuid fd067e60-6dc1-4569-b9d5-2c6f23bf1ec7)
+    (property "Reference" "R602" (at 218.44 139.7 0)
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (property "Value" "270" (at 219.71 142.24 0)
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 224.79 140.97 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "~" (at 224.79 140.97 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid 9bd5ec23-e2d4-4adc-aed6-dedd5e3bf319))
+    (pin "2" (uuid 40368d01-994d-49f0-b7fc-6653d2198aab))
+    (instances
+      (project "projet"
+        (path "/72843e5b-039f-43c6-ac6b-21bc38672670/3a7e19ea-ce35-4a7a-ac90-3d945470fc6b"
+          (reference "R602") (unit 1)
+        )
+      )
+      (project "kicad_chat-souris"
+        (path "/b1ddc66d-dbe7-4cff-b97f-1f0ce7ceeee4/a13fe5f2-f6e5-4a93-b768-5d6eb675b5fa"
+          (reference "R205") (unit 1)
+        )
+        (path "/b1ddc66d-dbe7-4cff-b97f-1f0ce7ceeee4/6a44a42c-5fbe-4248-b986-7ff99c499b51"
+          (reference "R309") (unit 1)
         )
       )
     )

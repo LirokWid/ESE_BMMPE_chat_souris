@@ -4,4 +4,5 @@
   (lib (name "STM32G070RBT6")(type "KiCad")(uri "${KIPRJMOD}/STM32G070RBT6/STM32G070RBT6.kicad_sym")(options "")(descr ""))
   (lib (name "LTC1731ES8-8_4")(type "KiCad")(uri "${KIPRJMOD}/CHARGE_LTC1731ES8-8_4/LTC1731ES8-8_4.kicad_sym")(options "")(descr ""))
   (lib (name "AP9211SA-AK-HAC-7")(type "KiCad")(uri "${KIPRJMOD}/PROTECT_AP9211SA-AK-HAC-7/AP9211SA-AK-HAC-7.kicad_sym")(options "")(descr ""))
+  (lib (name "DC_JACK")(type "KiCad")(uri "${KIPRJMOD}/DCJack_footprint/694102303002.kicad_sym")(options "")(descr ""))
 )

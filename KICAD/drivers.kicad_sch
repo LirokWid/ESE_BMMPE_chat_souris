@@ -180,14 +180,14 @@
         )
       )
     )
-    (symbol "Driver_Motor:ZXBM5210-S" (in_bom yes) (on_board yes)
+    (symbol "Driver_Motor:ZXBM5210-SP" (in_bom yes) (on_board yes)
       (property "Reference" "U" (at -7.62 8.89 0)
         (effects (font (size 1.27 1.27)))
       )
-      (property "Value" "ZXBM5210-S" (at 10.16 8.89 0)
+      (property "Value" "ZXBM5210-SP" (at 10.16 8.89 0)
         (effects (font (size 1.27 1.27)))
       )
-      (property "Footprint" "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm" (at 1.27 -6.35 0)
+      (property "Footprint" "Package_SO:Diodes_SO-8EP" (at 1.27 -6.35 0)
         (effects (font (size 1.27 1.27)) hide)
       )
       (property "Datasheet" "https://www.diodes.com/assets/Datasheets/ZXBM5210.pdf" (at 0 0 0)
@@ -196,13 +196,13 @@
       (property "ki_keywords" "H-bridge, motor driver, PWM, single coil" (at 0 0 0)
         (effects (font (size 1.27 1.27)) hide)
       )
-      (property "ki_description" "Reversible DC motor drive with speed control, 3-18V, 0.85A, SOIC-8" (at 0 0 0)
+      (property "ki_description" "Reversible DC motor drive with speed control, 3-18V, 0.85A, SOIC-8EP" (at 0 0 0)
         (effects (font (size 1.27 1.27)) hide)
       )
-      (property "ki_fp_filters" "SOIC*3.9x4.9mm*P1.27mm*" (at 0 0 0)
+      (property "ki_fp_filters" "Diodes*SO*EP*" (at 0 0 0)
         (effects (font (size 1.27 1.27)) hide)
       )
-      (symbol "ZXBM5210-S_0_0"
+      (symbol "ZXBM5210-SP_0_0"
         (pin output line (at 10.16 2.54 180) (length 2.54)
           (name "OUT1" (effects (font (size 1.27 1.27))))
           (number "1" (effects (font (size 1.27 1.27))))
@@ -235,8 +235,12 @@
           (name "GND" (effects (font (size 1.27 1.27))))
           (number "8" (effects (font (size 1.27 1.27))))
         )
+        (pin passive line (at 0 -7.62 90) (length 2.54) hide
+          (name "GND" (effects (font (size 1.27 1.27))))
+          (number "9" (effects (font (size 1.27 1.27))))
+        )
       )
-      (symbol "ZXBM5210-S_0_1"
+      (symbol "ZXBM5210-SP_0_1"
         (rectangle (start -7.62 7.62) (end 7.62 -5.08)
           (stroke (width 0.254) (type default))
           (fill (type background))
@@ -634,6 +638,23 @@
     (uuid b655a508-8f9c-4e7d-9599-63137083f94c)
   )
 
+  (label "MOT2_OUT1" (at 182.88 125.73 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27)) (justify left bottom))
+    (uuid 2795a1ff-39e8-41c5-b385-c67f83e374e3)
+  )
+  (label "MOT1_OUT2" (at 181.61 95.25 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27)) (justify left bottom))
+    (uuid 42050be8-6f07-40f3-96df-44785f7d73ea)
+  )
+  (label "MOT1_OUT1" (at 181.61 82.55 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27)) (justify left bottom))
+    (uuid afb2d0ec-b723-4c9b-9a58-12cdf1396dd9)
+  )
+  (label "MOT2_OUT2" (at 182.88 138.43 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27)) (justify left bottom))
+    (uuid ed63209a-9a79-48a5-abdb-4b67e20c2aa3)
+  )
+
   (hierarchical_label "MOTOR_1_FWD" (shape input) (at 101.6 85.09 180) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify right))
     (uuid 25a4d6cc-1bab-4102-a2ee-ab8241308829)
@@ -682,8 +703,8 @@
     (property "Datasheet" "~" (at 101.6 72.39 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 4a34342e-dd9e-4fcd-95ad-1ef9323986dc))
-    (pin "2" (uuid 5c561893-ca2a-45a5-913e-3a00b8be1b1a))
+    (pin "1" (uuid ac1589db-523f-4b0e-b948-340d42da5e51))
+    (pin "2" (uuid fda5caee-b8c5-41c0-8436-87cbeb82caeb))
     (instances
       (project "kicad_chat-souris"
         (path "/b1ddc66d-dbe7-4cff-b97f-1f0ce7ceeee4/e02fd429-6de0-42be-b82b-494bbb23caa2"
@@ -708,7 +729,7 @@
     (property "Datasheet" "" (at 121.92 135.89 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 41ede855-a167-4218-b4e4-a4787d8b59a0))
+    (pin "1" (uuid 6e769783-205f-4a93-9d8e-26595ef8d060))
     (instances
       (project "kicad_chat-souris"
         (path "/b1ddc66d-dbe7-4cff-b97f-1f0ce7ceeee4/e02fd429-6de0-42be-b82b-494bbb23caa2"
@@ -733,12 +754,12 @@
     (property "Datasheet" "~" (at 203.2 130.81 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 44043ad9-69cb-4ffb-9c4f-6846eb99fbbb))
-    (pin "2" (uuid 417a853a-2336-495d-80a7-75ead5dce00a))
-    (pin "3" (uuid 9a5f67a6-79c6-4ef1-b2ce-c469093f6597))
-    (pin "4" (uuid 241bc881-7c48-400a-ac5e-dc3b4f2d5a4a))
-    (pin "5" (uuid 2398f27d-a717-4708-9af9-f4a8d497b940))
-    (pin "6" (uuid 7e4943b1-f442-4f72-a5cb-4848ef736f54))
+    (pin "1" (uuid ea8142b0-24e0-49d6-9867-42c18eaf0301))
+    (pin "2" (uuid b70e5d78-7418-4d35-877d-52d42dcf8e3a))
+    (pin "3" (uuid f81c1fcc-e44e-48ec-91eb-58a4fac7c7fe))
+    (pin "4" (uuid ddd2a849-2ca6-4dba-a476-dc637e52d05e))
+    (pin "5" (uuid 478a8a5a-797d-4076-b36e-a980a93c79ab))
+    (pin "6" (uuid 1a2d579a-eb99-47ba-8a49-9ffce99d2207))
     (instances
       (project "kicad_chat-souris"
         (path "/b1ddc66d-dbe7-4cff-b97f-1f0ce7ceeee4/e02fd429-6de0-42be-b82b-494bbb23caa2"
@@ -763,7 +784,7 @@
     (property "Datasheet" "" (at 163.83 87.63 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid b849267d-992f-4e4a-9dbc-1b776c8edb2f))
+    (pin "1" (uuid 376bfabc-7572-405f-a95a-55f535966863))
     (instances
       (project "kicad_chat-souris"
         (path "/b1ddc66d-dbe7-4cff-b97f-1f0ce7ceeee4/e02fd429-6de0-42be-b82b-494bbb23caa2"
@@ -788,8 +809,8 @@
     (property "Datasheet" "~" (at 137.16 74.93 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 434e5572-d429-4579-8740-5f3d7547d79c))
-    (pin "2" (uuid 2d86d840-01bb-4deb-87de-3f424a0452cf))
+    (pin "1" (uuid 3a735e03-a313-4c4e-b27e-24c07677923c))
+    (pin "2" (uuid 0e9840f1-2d3a-46c1-93a9-b394384a2295))
     (instances
       (project "kicad_chat-souris"
         (path "/b1ddc66d-dbe7-4cff-b97f-1f0ce7ceeee4/e02fd429-6de0-42be-b82b-494bbb23caa2"
@@ -814,7 +835,7 @@
     (property "Datasheet" "" (at 101.6 67.31 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 20dcd81d-dda8-4bdc-999a-10d9ee1c1f5a))
+    (pin "1" (uuid e03e8c27-b569-4e47-a339-9ab4c8777565))
     (instances
       (project "kicad_chat-souris"
         (path "/b1ddc66d-dbe7-4cff-b97f-1f0ce7ceeee4/e02fd429-6de0-42be-b82b-494bbb23caa2"
@@ -839,7 +860,7 @@
     (property "Datasheet" "" (at 146.05 138.43 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid f2abde34-8adc-49ec-a201-107be21cef0e))
+    (pin "1" (uuid 535a821f-9533-4ac6-a36c-1c03db468f70))
     (instances
       (project "kicad_chat-souris"
         (path "/b1ddc66d-dbe7-4cff-b97f-1f0ce7ceeee4/e02fd429-6de0-42be-b82b-494bbb23caa2"
@@ -864,8 +885,8 @@
     (property "Datasheet" "~" (at 134.62 135.89 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 5a0a7fb2-6311-46f4-89e9-ad6bda9d6578))
-    (pin "2" (uuid 5f7310b3-6ed8-463a-bf5f-b75bc49c53fe))
+    (pin "1" (uuid 7ba70e18-dc67-4138-b5e5-5f1fa9f109a9))
+    (pin "2" (uuid 7b93750f-3cb6-4127-8af9-84eae819fb0e))
     (instances
       (project "kicad_chat-souris"
         (path "/b1ddc66d-dbe7-4cff-b97f-1f0ce7ceeee4/e02fd429-6de0-42be-b82b-494bbb23caa2"
@@ -875,7 +896,7 @@
     )
   )
 
-  (symbol (lib_id "Driver_Motor:ZXBM5210-S") (at 121.92 128.27 0) (unit 1)
+  (symbol (lib_id "Driver_Motor:ZXBM5210-SP") (at 121.92 128.27 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 4e419e26-471a-4b81-adbf-186d6819dc97)
     (property "Reference" "U402" (at 124.1141 135.89 0)
@@ -884,20 +905,21 @@
     (property "Value" "ZXBM5210-S_2" (at 106.68 135.89 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Footprint" "Package_SO:SOIC-8-1EP_3.9x4.9mm_P1.27mm_EP2.62x3.51mm" (at 123.19 134.62 0)
+    (property "Footprint" "Package_SO:SOIC-8-1EP_3.9x4.9mm_P1.27mm_EP2.514x3.2mm_ThermalVias" (at 123.19 134.62 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "https://www.diodes.com/assets/Datasheets/ZXBM5210.pdf" (at 121.92 128.27 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 3da2b858-f907-4fc4-9c76-aaae6a7dbdb5))
-    (pin "2" (uuid 310916c6-d324-4729-9c5e-8bfe18047372))
-    (pin "3" (uuid 9ce6fd94-6b33-4565-a1d2-ac3c069c0278))
-    (pin "4" (uuid 9b4d2770-d158-4f2e-b6a1-b5a955b6d589))
-    (pin "5" (uuid e6e5c2f3-4120-4758-9308-96bedbccbc1f))
-    (pin "6" (uuid ab9db4e8-20ab-496b-abf6-457065f6cb54))
-    (pin "7" (uuid 177b9ae6-57c1-471a-b689-64f6b8f49c29))
-    (pin "8" (uuid 16bd3f9e-b183-4056-91e5-5614b4c55f6c))
+    (pin "1" (uuid c632b372-fe0c-4860-9621-b66831015bd3))
+    (pin "2" (uuid 1df39946-e025-40e4-893d-67d8bec45044))
+    (pin "3" (uuid df95f4c6-298a-42b4-adec-30785539206e))
+    (pin "4" (uuid b4544185-d3f6-4591-9e92-2dcd736e08c2))
+    (pin "5" (uuid 9f5c8229-e424-4f8c-8df5-6a4c78edcfa2))
+    (pin "6" (uuid 4950e2c5-beb7-42a6-ab14-a8eb352deabc))
+    (pin "7" (uuid e6fa130c-face-4dac-a7db-56fc330b1562))
+    (pin "8" (uuid 98dc1e65-7b6d-4a0a-bda2-78a12c562ea3))
+    (pin "9" (uuid 6b2d6e9f-3162-4fdf-9ac7-a139624b88ba))
     (instances
       (project "kicad_chat-souris"
         (path "/b1ddc66d-dbe7-4cff-b97f-1f0ce7ceeee4/e02fd429-6de0-42be-b82b-494bbb23caa2"
@@ -922,7 +944,7 @@
     (property "Datasheet" "" (at 144.78 74.93 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid f22bd6ee-b803-4f4a-b078-b41104600b3f))
+    (pin "1" (uuid c48cd54b-d875-4d4a-9e0b-e8a4c1c2bae3))
     (instances
       (project "kicad_chat-souris"
         (path "/b1ddc66d-dbe7-4cff-b97f-1f0ce7ceeee4/e02fd429-6de0-42be-b82b-494bbb23caa2"
@@ -947,7 +969,7 @@
     (property "Datasheet" "" (at 101.6 119.38 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 82bc7e4e-412d-44e3-9a1e-043137a10715))
+    (pin "1" (uuid 8a4bfbaf-c499-444a-848f-189efb617c9e))
     (instances
       (project "kicad_chat-souris"
         (path "/b1ddc66d-dbe7-4cff-b97f-1f0ce7ceeee4/e02fd429-6de0-42be-b82b-494bbb23caa2"
@@ -972,7 +994,7 @@
     (property "Datasheet" "" (at 170.18 90.17 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 20960a7b-9c10-4eb4-8334-47fec03d333e))
+    (pin "1" (uuid b2fd91e7-5449-4979-8886-1847fc240868))
     (instances
       (project "kicad_chat-souris"
         (path "/b1ddc66d-dbe7-4cff-b97f-1f0ce7ceeee4/e02fd429-6de0-42be-b82b-494bbb23caa2"
@@ -997,7 +1019,7 @@
     (property "Datasheet" "" (at 101.6 111.76 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 2bdda5e0-8a68-45ae-ac58-eae65abc16dd))
+    (pin "1" (uuid 72602892-6f29-424a-aaf5-9543e7abb861))
     (instances
       (project "kicad_chat-souris"
         (path "/b1ddc66d-dbe7-4cff-b97f-1f0ce7ceeee4/e02fd429-6de0-42be-b82b-494bbb23caa2"
@@ -1022,7 +1044,7 @@
     (property "Datasheet" "" (at 144.78 118.11 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 3794ca79-9158-46fb-bcb5-7fbb6c87642e))
+    (pin "1" (uuid c02849fc-eb64-43f6-8bce-568c7dcb6c2a))
     (instances
       (project "kicad_chat-souris"
         (path "/b1ddc66d-dbe7-4cff-b97f-1f0ce7ceeee4/e02fd429-6de0-42be-b82b-494bbb23caa2"
@@ -1047,8 +1069,8 @@
     (property "Datasheet" "~" (at 137.16 118.11 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 77d3ded7-01b9-4323-b8ae-b3a99ecd0644))
-    (pin "2" (uuid aa3e0fa5-8198-400d-9ba1-dd1d1470b8c7))
+    (pin "1" (uuid bd4b15d8-ec51-4c9c-bd36-b4170cb2407d))
+    (pin "2" (uuid 8ffae323-b870-4a13-9222-4420d9f5562d))
     (instances
       (project "kicad_chat-souris"
         (path "/b1ddc66d-dbe7-4cff-b97f-1f0ce7ceeee4/e02fd429-6de0-42be-b82b-494bbb23caa2"
@@ -1073,8 +1095,8 @@
     (property "Datasheet" "~" (at 134.62 92.71 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid fa96a72d-fb57-4333-8f37-1437adf0ea80))
-    (pin "2" (uuid 29d86b2f-1b64-4b2c-8ccf-03f84c1bc70f))
+    (pin "1" (uuid e2780860-153f-4956-a010-e4a417b511c5))
+    (pin "2" (uuid df8640f0-5ede-4c60-9194-22a653fa01b5))
     (instances
       (project "kicad_chat-souris"
         (path "/b1ddc66d-dbe7-4cff-b97f-1f0ce7ceeee4/e02fd429-6de0-42be-b82b-494bbb23caa2"
@@ -1099,7 +1121,7 @@
     (property "Datasheet" "" (at 134.62 138.43 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 1b49ad84-0b18-4285-b6e8-b5cc6609c304))
+    (pin "1" (uuid 44a9ee8f-edfb-4a19-af10-37f2c25bf4ab))
     (instances
       (project "kicad_chat-souris"
         (path "/b1ddc66d-dbe7-4cff-b97f-1f0ce7ceeee4/e02fd429-6de0-42be-b82b-494bbb23caa2"
@@ -1124,7 +1146,7 @@
     (property "Datasheet" "" (at 124.46 111.76 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 5d11f56b-2630-402a-ba91-4b219254fe4d))
+    (pin "1" (uuid 611fdf89-72f0-41ed-b857-c98e5469bced))
     (instances
       (project "kicad_chat-souris"
         (path "/b1ddc66d-dbe7-4cff-b97f-1f0ce7ceeee4/e02fd429-6de0-42be-b82b-494bbb23caa2"
@@ -1149,7 +1171,7 @@
     (property "Datasheet" "" (at 146.05 95.25 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 01ee5473-713a-401e-b817-6009b5068f26))
+    (pin "1" (uuid dfa01a3e-8a16-4582-8190-c8008145b7fd))
     (instances
       (project "kicad_chat-souris"
         (path "/b1ddc66d-dbe7-4cff-b97f-1f0ce7ceeee4/e02fd429-6de0-42be-b82b-494bbb23caa2"
@@ -1174,7 +1196,7 @@
     (property "Datasheet" "" (at 101.6 74.93 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 85412fc3-8d95-4f47-b0cb-46ab9455b3f0))
+    (pin "1" (uuid 0a23d386-ec7b-422c-9b7a-f7dedfe2b4cb))
     (instances
       (project "kicad_chat-souris"
         (path "/b1ddc66d-dbe7-4cff-b97f-1f0ce7ceeee4/e02fd429-6de0-42be-b82b-494bbb23caa2"
@@ -1199,7 +1221,7 @@
     (property "Datasheet" "" (at 175.26 134.62 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 6b35e275-42a6-44c9-aa92-58dcacbcb03c))
+    (pin "1" (uuid fe265046-054b-4f59-92a8-9ac4f5be84c2))
     (instances
       (project "kicad_chat-souris"
         (path "/b1ddc66d-dbe7-4cff-b97f-1f0ce7ceeee4/e02fd429-6de0-42be-b82b-494bbb23caa2"
@@ -1224,7 +1246,7 @@
     (property "Datasheet" "" (at 124.46 67.31 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid e9f9da84-b7ab-494a-a004-e43aaa7a4762))
+    (pin "1" (uuid 190bd6c6-5ca4-4bb9-99f4-028056ff6f67))
     (instances
       (project "kicad_chat-souris"
         (path "/b1ddc66d-dbe7-4cff-b97f-1f0ce7ceeee4/e02fd429-6de0-42be-b82b-494bbb23caa2"
@@ -1249,8 +1271,8 @@
     (property "Datasheet" "~" (at 146.05 135.89 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid f6c18309-8504-4eda-80b6-0c6ef5e5096b))
-    (pin "2" (uuid 9d0c7550-5f28-4611-9476-832c6d2d428c))
+    (pin "1" (uuid 754a6627-4a1b-4c44-bf72-b77b43524c15))
+    (pin "2" (uuid 0b8a6209-63cd-475a-a39c-be234a819eb7))
     (instances
       (project "kicad_chat-souris"
         (path "/b1ddc66d-dbe7-4cff-b97f-1f0ce7ceeee4/e02fd429-6de0-42be-b82b-494bbb23caa2"
@@ -1275,7 +1297,7 @@
     (property "Datasheet" "" (at 168.91 128.27 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid b754b72f-c9a9-40b2-9fd3-9692649ca3a4))
+    (pin "1" (uuid 9dca01ee-b287-4d3f-8b7c-b9636a5e3f38))
     (instances
       (project "kicad_chat-souris"
         (path "/b1ddc66d-dbe7-4cff-b97f-1f0ce7ceeee4/e02fd429-6de0-42be-b82b-494bbb23caa2"
@@ -1300,7 +1322,7 @@
     (property "Datasheet" "" (at 134.62 95.25 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 49384166-3971-494f-a197-d4cace8f227f))
+    (pin "1" (uuid aaa21758-a9d0-4af0-ada4-49290e6984ff))
     (instances
       (project "kicad_chat-souris"
         (path "/b1ddc66d-dbe7-4cff-b97f-1f0ce7ceeee4/e02fd429-6de0-42be-b82b-494bbb23caa2"
@@ -1325,8 +1347,8 @@
     (property "Datasheet" "~" (at 101.6 116.84 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 7855274c-9009-4a89-935e-114df2f931e6))
-    (pin "2" (uuid b610dff8-1af3-484d-a104-524452a201c9))
+    (pin "1" (uuid 5d0593f7-89c0-455e-a623-0da2ca1a6c39))
+    (pin "2" (uuid 6d427299-86b7-404e-97db-1f0c3b6dc7a4))
     (instances
       (project "kicad_chat-souris"
         (path "/b1ddc66d-dbe7-4cff-b97f-1f0ce7ceeee4/e02fd429-6de0-42be-b82b-494bbb23caa2"
@@ -1351,12 +1373,12 @@
     (property "Datasheet" "~" (at 203.2 87.63 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 2f00c8c0-8952-4c29-bb29-8f21cf676bc1))
-    (pin "2" (uuid cd0c449f-8ed8-44ba-9c33-77750f61ec2c))
-    (pin "3" (uuid bad9d9ef-9ef5-4e43-84f3-2fad01b3c750))
-    (pin "4" (uuid 1740d595-8e79-4d34-93a9-d7ffa3895397))
-    (pin "5" (uuid 70ce8eed-6438-4aaf-ab3a-5b135aeca31f))
-    (pin "6" (uuid 39e94238-2cd6-4fa7-9eda-cca08a975d77))
+    (pin "1" (uuid ddbc158b-ae8d-4ae6-9a38-116982ee4fac))
+    (pin "2" (uuid f01569b9-8a2d-47c3-bc96-886d6ca3e98f))
+    (pin "3" (uuid db4e63a2-716e-40e9-b69a-762d11ee5173))
+    (pin "4" (uuid 1e1c6617-7712-4cb4-8469-e14ae4cd6523))
+    (pin "5" (uuid 31ce9273-694b-418f-83fd-3447b8ad4ed0))
+    (pin "6" (uuid afe7e601-fa20-432a-944f-5fe274d62d09))
     (instances
       (project "kicad_chat-souris"
         (path "/b1ddc66d-dbe7-4cff-b97f-1f0ce7ceeee4/e02fd429-6de0-42be-b82b-494bbb23caa2"
@@ -1381,7 +1403,7 @@
     (property "Datasheet" "" (at 121.92 92.71 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 91a76781-ec8b-4fe4-a1a4-b272dc47619f))
+    (pin "1" (uuid 06086321-2902-4c20-84fd-028cdf92c5e6))
     (instances
       (project "kicad_chat-souris"
         (path "/b1ddc66d-dbe7-4cff-b97f-1f0ce7ceeee4/e02fd429-6de0-42be-b82b-494bbb23caa2"
@@ -1406,8 +1428,8 @@
     (property "Datasheet" "~" (at 146.05 92.71 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 4e7d13a1-9286-433c-8fda-72effdc32b6c))
-    (pin "2" (uuid d8ece962-c257-4e00-a5c7-28cd9d265de7))
+    (pin "1" (uuid a4cf0183-7de7-454d-8cfe-4b3d9e3df5a4))
+    (pin "2" (uuid 3d105fa6-3787-4a31-b0f6-060c7cce828d))
     (instances
       (project "kicad_chat-souris"
         (path "/b1ddc66d-dbe7-4cff-b97f-1f0ce7ceeee4/e02fd429-6de0-42be-b82b-494bbb23caa2"
@@ -1417,7 +1439,7 @@
     )
   )
 
-  (symbol (lib_id "Driver_Motor:ZXBM5210-S") (at 121.92 85.09 0) (unit 1)
+  (symbol (lib_id "Driver_Motor:ZXBM5210-SP") (at 121.92 85.09 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid f890321d-706a-4883-acb4-091a8a2a1c8f)
     (property "Reference" "U401" (at 124.1141 92.71 0)
@@ -1426,20 +1448,21 @@
     (property "Value" "ZXBM5210-S_1" (at 106.68 92.71 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Footprint" "Package_SO:SOIC-8-1EP_3.9x4.9mm_P1.27mm_EP2.62x3.51mm" (at 123.19 91.44 0)
+    (property "Footprint" "Package_SO:SOIC-8-1EP_3.9x4.9mm_P1.27mm_EP2.514x3.2mm_ThermalVias" (at 123.19 91.44 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "https://www.diodes.com/assets/Datasheets/ZXBM5210.pdf" (at 121.92 85.09 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid ee2f8f82-ef63-46b6-bbd1-bbd079a03527))
-    (pin "2" (uuid dfd2b220-2b48-4830-aa6c-b614bbe06a44))
-    (pin "3" (uuid c848fbcc-7b08-4615-9166-0d45192d248c))
-    (pin "4" (uuid 44a88418-f26c-47c0-a7c0-97a397644f38))
-    (pin "5" (uuid 6ab461d5-22e1-42ca-848a-e14729faeb5a))
-    (pin "6" (uuid d8d0953f-1e96-4618-be70-c836419ddebc))
-    (pin "7" (uuid f7449ca7-0ec2-4b64-9e7f-e45fd85ee28d))
-    (pin "8" (uuid 94eab1dc-25f5-4ebd-b335-210a0502f2a1))
+    (pin "1" (uuid a94a925b-c265-4b71-8d7c-761b1575ba44))
+    (pin "2" (uuid f4beb8c7-d35c-44d0-9299-87817b451957))
+    (pin "3" (uuid 0c289dd7-b301-4d95-922d-6ab651306ed2))
+    (pin "4" (uuid 1fd1b6e2-d46b-407e-9883-78262463a47b))
+    (pin "5" (uuid c237e2c0-acad-4125-b302-752804d0df48))
+    (pin "6" (uuid fef31cf1-a14f-4604-8817-89a1a0743427))
+    (pin "7" (uuid 998b6a7e-dde0-49a4-b521-5cfaa5adbd87))
+    (pin "8" (uuid 1c332590-85ce-47c4-8c52-de2d03c371cb))
+    (pin "9" (uuid b3c3bbe9-335e-4c2d-8052-edf02b8cafcb))
     (instances
       (project "kicad_chat-souris"
         (path "/b1ddc66d-dbe7-4cff-b97f-1f0ce7ceeee4/e02fd429-6de0-42be-b82b-494bbb23caa2"

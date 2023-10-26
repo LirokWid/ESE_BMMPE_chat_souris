@@ -18,6 +18,7 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "dma.h"
 #include "usart.h"
 #include "tim.h"
 #include "gpio.h"
@@ -25,6 +26,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "lidar_driver.h"
+#include "transmit.h"
 
 /* USER CODE END Includes */
 
@@ -36,6 +38,8 @@
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
 
+#define RX_BUFFER_SIZE   100
+
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -46,17 +50,39 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
+h_lidar_t lidar;
 
+uint8_t aTextInfoStart[] = "\r\nUSART Example : Enter characters to fill reception buffers.\r\n";
+
+uint8_t RX_data[RX_BUFFER_SIZE];
+
+/**
+  * @brief Data buffers used to manage received data in interrupt routine
+  */
+uint8_t aRXBufferA[RX_BUFFER_SIZE];
+uint8_t aRXBufferB[RX_BUFFER_SIZE];
+uint8_t aRXBufferUser[RX_BUFFER_SIZE];
+
+int flag = 0;
+
+
+__IO uint32_t     uwNbReceivedChars;
+uint8_t *pBufferReadyForUser;
+uint8_t *pBufferReadyForReception;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 /* USER CODE BEGIN PFP */
+void StartReception(void);
+void UserDataTreatment(UART_HandleTypeDef *huart, uint8_t* pData, uint16_t Size);
+
 
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+
 
 /* USER CODE END 0 */
 
@@ -88,23 +114,44 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
-  MX_LPUART1_UART_Init();
+  MX_DMA_Init();
   MX_USART1_UART_Init();
   MX_TIM1_Init();
+  MX_LPUART1_UART_Init();
   /* USER CODE BEGIN 2 */
 
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+
+  printf("Starting initialization\r\n");
+
+  HAL_Delay(1000);
+  //StartReception();
+  if(lidar_init(&lidar,&huart1) != SUCCESS)
+  {
+	  printf("Could not init lidar, aborting start");
+	  Error_Handler();
+  }else{
+	  printf("Lidar initialized\r\n");
+  }
+
+
+  printf("Initialization succeeded\r\n");
+
+  //stop_motor();
+
+  HAL_Delay(1000);
+
+  //HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, 1);
   while (1)
   {
-	  //HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_1);
-	  //HAL_Delay(10000);
-	  LIDAR_MESURE_ENABLE_GPIO_Port;
+	  //HAL_Delay(4000);
+
+
+
     /* USER CODE END WHILE */
-
-
 
     /* USER CODE BEGIN 3 */
   }
@@ -159,6 +206,23 @@ void SystemClock_Config(void)
 
 /* USER CODE BEGIN 4 */
 
+//https://community.st.com/t5/stm32-mcus/faq-stm32-hal-uart-driver-api-and-callbacks/ta-p/49301
+
+void HAL_UART_RxHalfCpltCallback(UART_HandleTypeDef *huart)
+{
+
+}
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
+    if (huart == lidar.uart)
+    {
+    	HAL_GPIO_TogglePin (GPIOA, GPIO_PIN_5);  // toggle PA0
+    	parse_dma_buffer();
+    }
+
+}
+
+
 /* USER CODE END 4 */
 
 /**
@@ -172,6 +236,9 @@ void Error_Handler(void)
   __disable_irq();
   while (1)
   {
+	  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, 1);
+	  printf("error\n\r");
+	  HAL_Delay(2000);
   }
   /* USER CODE END Error_Handler_Debug */
 }

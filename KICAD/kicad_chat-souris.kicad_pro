@@ -34,9 +34,9 @@
         "other_text_thickness": 0.15,
         "other_text_upright": false,
         "pads": {
-          "drill": 0.762,
-          "height": 1.524,
-          "width": 1.524
+          "drill": 1.0,
+          "height": 1.7,
+          "width": 1.7
         },
         "silk_line_width": 0.15,
         "silk_text_italic": false,
@@ -55,7 +55,13 @@
           "width": 0.0
         }
       ],
-      "drc_exclusions": [],
+      "drc_exclusions": [
+        "silk_over_copper|142891894|77355153|e16500ac-fdfa-42d7-b8b2-69056336810b|00000000-0000-0000-0000-000000000000",
+        "silk_over_copper|152670000|99820000|d7b1b636-65b0-4269-93cf-50d59ea37d7e|00000000-0000-0000-0000-000000000000",
+        "solder_mask_bridge|156370000|60720000|d5ad0221-091f-4571-a5fe-abd9a255ef23|584c92c1-8351-425c-91ee-341529adc81d",
+        "solder_mask_bridge|156370000|61470000|d5ad0221-091f-4571-a5fe-abd9a255ef23|584c92c1-8351-425c-91ee-341529adc81d",
+        "solder_mask_bridge|160270000|60720000|73b0804b-c71e-40d2-8a5f-3a01025d73fd|584c92c1-8351-425c-91ee-341529adc81d"
+      ],
       "meta": {
         "version": 2
       },
@@ -91,9 +97,9 @@
         "padstack": "warning",
         "pth_inside_courtyard": "ignore",
         "shorting_items": "error",
-        "silk_edge_clearance": "warning",
+        "silk_edge_clearance": "ignore",
         "silk_over_copper": "warning",
-        "silk_overlap": "warning",
+        "silk_overlap": "ignore",
         "skew_out_of_range": "error",
         "solder_mask_bridge": "error",
         "starved_thermal": "error",
@@ -111,7 +117,7 @@
       },
       "rules": {
         "max_error": 0.005,
-        "min_clearance": 0.0,
+        "min_clearance": 0.15,
         "min_connection": 0.0,
         "min_copper_edge_clearance": 0.0,
         "min_hole_clearance": 0.25,
@@ -123,7 +129,7 @@
         "min_text_height": 0.7999999999999999,
         "min_text_thickness": 0.08,
         "min_through_hole_diameter": 0.3,
-        "min_track_width": 0.0,
+        "min_track_width": 0.19999999999999998,
         "min_via_annular_width": 0.09999999999999999,
         "min_via_diameter": 0.5,
         "solder_mask_clearance": 0.0,
@@ -172,12 +178,18 @@
         }
       ],
       "track_widths": [
-        0.0
+        0.0,
+        0.3,
+        1.0
       ],
       "via_dimensions": [
         {
           "diameter": 0.0,
           "drill": 0.0
+        },
+        {
+          "diameter": 0.8,
+          "drill": 0.4
         }
       ],
       "zones_allow_external_fillets": false
@@ -412,7 +424,7 @@
     "classes": [
       {
         "bus_width": 12,
-        "clearance": 0.2,
+        "clearance": 0.15,
         "diff_pair_gap": 0.25,
         "diff_pair_via_gap": 0.25,
         "diff_pair_width": 0.2,
@@ -433,7 +445,12 @@
     },
     "net_colors": null,
     "netclass_assignments": null,
-    "netclass_patterns": []
+    "netclass_patterns": [
+      {
+        "netclass": "Default",
+        "pattern": "GND"
+      }
+    ]
   },
   "pcbnew": {
     "last_paths": {

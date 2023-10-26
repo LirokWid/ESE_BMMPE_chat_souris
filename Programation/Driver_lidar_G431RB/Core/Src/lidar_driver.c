@@ -6,11 +6,254 @@
  */
 #include "lidar_driver.h"
 
-void turn_on_motor()
-{
-	int j = LIDAR_MESURE_ENABLE_GPIO_Port;
+extern h_lidar_t lidar;
 
-	j++;
+
+
+int lidar_init(h_lidar_t *lidar,UART_HandleTypeDef* lidar_uart)
+{
+	/**
+	 * 1.Turn on the motor
+	 * 2.Try to connect to the lidar
+	 * 3.If connected, get make, ID and status of the lidar
+	 * 4.Start scanning in circular DMA mode
+	 */
+	lidar->uart = lidar_uart;
+	lidar->is_sending = 0;
+
+
+	lidar_send_command(COMMAND_STOP_SCAN);
+	HAL_Delay(50);
+
+	//1.
+	start_motor();
+
+	get_ID(lidar);
+	get_health(lidar);
+
+	//Start point data transfer to the DMA
+	start_scan(lidar);
+
+	return SUCCESS;
+}
+
+int start_scan(h_lidar_t* lidar)
+{
+	HAL_UART_Receive_DMA(lidar->uart, lidar->dma_buffer, RX_BUFFER_SIZE);
+	if(lidar_send_command(COMMAND_START_SCAN))
+	{
+		lidar->is_sending = 1;
+
+		return SUCCESS;
+	}else{
+		return ERROR;
+	}
+}
+
+int stop_scan(h_lidar_t* lidar)
+{//TODO : this function
+	HAL_UART_DMAStop(lidar->uart);
 
 	return 0;
 }
+
+int get_ID(h_lidar_t* lidar)
+{
+
+	lidar_send_command(COMMAND_GET_ID);
+	lidar_frame_response_t response;
+	lidar_receive_blocking(&response);
+
+	//print_response(&response);
+	lidar->model 			= response.content[0];
+	lidar->firmware.major	= response.content[1];
+	lidar->firmware.minor	= response.content[2];
+	lidar->hardware			= response.content[3];
+	for(int i=0;i<16;i++)
+	{
+		lidar->serial_number[i]= response.content[i+4];
+	}
+
+	//Print id values on the terminal if debug is defined
+#ifdef SERIAL_DEBUG
+	printf("***Lidar IDs***\n\r");
+	printf("model     | %x\n\r",lidar->model);
+	printf("firmware  | %d.%d\n\r",lidar->firmware.major,lidar->firmware.minor);
+	printf("hardware  | %x\n\r",lidar->hardware);
+	printf("serial nb | ");
+	for(int i=0;i<16;i++)
+	{
+		printf("%x",lidar->serial_number[i]);
+	}
+	printf("\n\r");
+#endif
+
+	return 0;
+}
+
+int get_health(h_lidar_t* lidar)
+{
+
+	lidar_send_command(COMMAND_GET_STATUS);
+	lidar_frame_response_t response;
+	lidar_receive_blocking(&response);
+
+	//print_response(&response);
+
+	lidar->health.status	 	= response.content[0];
+	lidar->health.error_code[0] = response.content[1];
+	lidar->health.error_code[1] = response.content[2];
+
+	//Print id values on the terminal if debug is defined
+#ifdef SERIAL_DEBUG
+	printf("\r\n***Lidar health***\r\n");
+	printf("status    | %d\r\n",lidar->health.status);
+	printf("error code| %x%x\r\n",lidar->health.error_code[0],lidar->health.error_code[1]);
+	printf("\n\n\n\n");
+#endif
+
+	return 0;
+
+}
+
+void print_response(lidar_frame_response_t *response)
+{
+	printf("\n\n\rlidar response :\n\n\r");
+	printf("header code |%x:%x\r\n",response->start_sign[0],response->start_sign[1]);
+	printf("mode 		|%x\r\n",response->mode);
+	printf("typecode 	|%x\r\n",response->type_code);
+
+	printf("Response content -> ");
+	for(int i=0;i<response->content_size;i++)
+	{
+		printf("%x",response->content[i]);
+	}
+	printf("\r\n");
+}
+
+
+void start_motor()
+{
+	HAL_GPIO_WritePin(LIDAR_MOTOR_ENABLE_GPIO_Port, LIDAR_MOTOR_ENABLE_Pin, 1);
+}
+
+void stop_motor()
+{
+	HAL_GPIO_WritePin(LIDAR_MOTOR_ENABLE_GPIO_Port, LIDAR_MOTOR_ENABLE_Pin, 0);
+}
+
+int lidar_send_command(LidarCommand command)
+{
+
+    LidarCommandStruct cmd;
+    cmd.prefix = PREFIX;
+    cmd.command = command;
+
+    int size_cmd_struct = sizeof(LidarCommandStruct);
+
+    // Convert the struct to a byte array
+    uint8_t cmdBuffer[sizeof(LidarCommandStruct)];
+    memcpy(cmdBuffer, &cmd, sizeof(LidarCommandStruct));
+    //TODO : passer en lecture de structure plutot que de passer par le buffer
+
+    // Send the byte array over UART
+    int result = HAL_UART_Transmit(lidar.uart, cmdBuffer, size_cmd_struct, HAL_MAX_DELAY);
+
+    if (result == HAL_OK)
+    {
+    	return SUCCESS;
+    }else{
+    	return ERROR;
+    }
+}
+int lidar_receive_blocking(lidar_frame_response_t *response)
+{
+	const int header_size = 7;
+	uint8_t header_buffer[header_size];
+
+	//Receive header
+	if(HAL_UART_Receive(lidar.uart, header_buffer, header_size, 5000)!= HAL_OK){Error_Handler();}
+
+	//Then parse header response to get content size
+	response->content_size =
+			header_buffer[2] |
+			header_buffer[3] << 8 |
+			header_buffer[4] << 16 |
+		    (header_buffer[5] & 0x3F) << 24;		//Select only 6 bits LSB
+
+	//Receive main content from content size
+	if(HAL_UART_Receive(lidar.uart, response->content, response->content_size, 5000)!= HAL_OK){Error_Handler();}
+
+	//Finish to compute the header response and exit the function
+	response->start_sign[0] = header_buffer[0];
+	response->start_sign[1] = header_buffer[1];
+	response->mode = header_buffer[5]&0xC0;	//Mode is contained in 2 bits MSB of byte 5
+	response->type_code = header_buffer[6];
+
+	return SUCCESS;
+
+}
+
+void parse_dma_buffer()
+{
+	uint8_t data_to_parse[RX_BUFFER_SIZE];
+
+	for(int i=0;i<RX_BUFFER_SIZE;i++)
+	{
+		data_to_parse[i] = lidar.dma_buffer[i];
+		//printf("%x",data_to_parse[i]);
+	}
+
+
+	//find the first 0xAA55001 data that shows the start of a frame
+	uint8_t targetByte1 = 0xaa;  // First byte to search for
+	uint8_t targetByte2 = 0x55;  // Second byte to search for
+
+	int arraySize = RX_BUFFER_SIZE;
+
+	const int PackageSampleMaxLngth = 0x40;
+	const int header_size = 10; //bytes
+
+	float point_array[50];
+
+	// Search for the first byte
+	for (int i = 0; i < arraySize; i++)
+	{
+        if (	data_to_parse[i] 		== targetByte1 &&
+        		data_to_parse[i + 1] 	== targetByte2)
+        {// We found the start byte, now parsing the frame
+        	uint8_t 	CT 	= data_to_parse[i+2];								//Package type and frequency
+			uint8_t 	LSN	= data_to_parse[i+3];								//Number of sampling points
+			uint8_t 	FSA = data_to_parse[i+4] + (data_to_parse[i+5]<<8); 	//Start angle on 2 bytes LSB first
+			uint8_t 	LSA = data_to_parse[i+6] + (data_to_parse[i+7]<<8); 	//End angle on 2 bytes LSB first
+			uint8_t		CS	= data_to_parse[i+8] + (data_to_parse[i+9]<<8); 	//Checksum (XOR)
+
+			int	packet_type = CT & 0x1;											//Mask to retrieve the first bit, if 1, it's a sequence start
+
+			if(packet_type != 1)
+			{
+				int data_start_byte = i + header_size;
+				//find out the number of points in the frame because LSN isn't reliable
+
+
+
+				for (int j =0;j<10;j++)//We (sometimes) know the number of point to sample, loop trough them to get the values
+				{
+					uint16_t dist = data_to_parse[data_start_byte + j] +(data_to_parse[data_start_byte + j + 1]<<8);	//Distance is on 2 byte /4 to get distance(data sheet) in mm
+					point_array[j] = (float) dist/4;
+					//printf("%.2f |",point_array[j]);
+				}
+
+				printf("CT %02X %s | LSN %02X | FSA %02X | LSA %02X | CS %02X -|-|-|- p1 %08.2f | p2 %08.2f | p3 %08.2f | p4 %08.2f | p5 %08.2f\n\r",CT,packet_type?"START":"     ",LSN,FSA,LSA,CS,point_array[0],point_array[1],point_array[2],point_array[3],point_array[4]);
+				fflush(stdout);
+
+			}
+			//printf("\n\r");
+
+
+//			i+=(9+(LSN*2));//Skip the parsed frame to find the next one
+        }
+	}
+    //printf("#################### - END_FRAME - ####################\n\r");
+}
+
