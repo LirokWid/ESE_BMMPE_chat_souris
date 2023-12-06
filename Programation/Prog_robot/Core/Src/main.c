@@ -26,7 +26,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "tasks.h"
+#include "../../Drivers/HC05/tasks_HC05.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/

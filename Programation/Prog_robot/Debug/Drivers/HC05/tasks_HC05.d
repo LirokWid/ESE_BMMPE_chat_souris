@@ -1,4 +1,5 @@
-Core/Src/tasks.o: ../Core/Src/tasks.c ../Core/Inc/tasks.h \
+Drivers/HC05/tasks_HC05.o: ../Drivers/HC05/tasks_HC05.c \
+ ../Drivers/HC05/tasks_HC05.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h \
  ../Core/Inc/FreeRTOSConfig.h \
@@ -49,8 +50,8 @@ Core/Src/tasks.o: ../Core/Src/tasks.c ../Core/Inc/tasks.h \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_tim_ex.h \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_uart.h \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_uart_ex.h \
- ../Core/Inc/usart.h ../Core/Inc/gpio.h
-../Core/Inc/tasks.h:
+ ../Core/Inc/usart.h ../Core/Inc/main.h ../Core/Inc/gpio.h
+../Drivers/HC05/tasks_HC05.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h:
 ../Core/Inc/FreeRTOSConfig.h:
@@ -103,4 +104,5 @@ Core/Src/tasks.o: ../Core/Src/tasks.c ../Core/Inc/tasks.h \
 ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_uart.h:
 ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_uart_ex.h:
 ../Core/Inc/usart.h:
+../Core/Inc/main.h:
 ../Core/Inc/gpio.h:

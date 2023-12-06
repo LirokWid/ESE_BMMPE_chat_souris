@@ -1,3 +1,0 @@
-../Core/Src/tasks.c:6:6:LED_STATE_Task	1
-../Core/Src/tasks.c:13:6:LED_ERROR_Task	1
-../Core/Src/tasks.c:20:6:Start_All_Tasks	1
