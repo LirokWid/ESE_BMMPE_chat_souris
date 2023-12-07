@@ -27,6 +27,8 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "../../Drivers/HC05/tasks_HC05.h"
+#include "../../Drivers/Motor/motor.h"
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -47,7 +49,8 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-
+extern driver_motor_t left_motor;
+extern driver_motor_t right_motor;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -104,7 +107,12 @@ int main(void)
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
   // Create and start FreeRTOS tasks
-  Start_All_Tasks();
+  HAL_TIM_PWM_Start(left_motor.forward_htim,left_motor.forward_CHANNEL);
+  HAL_TIM_PWM_Start(left_motor.reverse_htim,left_motor.reverse_CHANNEL);
+  HAL_TIM_PWM_Start(right_motor.forward_htim,right_motor.forward_CHANNEL);
+  HAL_TIM_PWM_Start(right_motor.reverse_htim,right_motor.reverse_CHANNEL);
+  Start_HC05_Tasks();
+  Start_motor_Tasks();
   // Start the scheduler
   vTaskStartScheduler();
   /* USER CODE END 2 */

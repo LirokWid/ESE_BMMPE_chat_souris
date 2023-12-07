@@ -21,6 +21,7 @@
 #include "main.h"
 #include "stm32g0xx_it.h"
 #include "FreeRTOS.h"
+#include "task.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "cmsis_os.h"
@@ -158,7 +159,7 @@ void USART3_4_IRQHandler(void)
 	xQueueSendFromISR(q_read_BT,(void*)&buffer,&higher_priority_task_woken);
 
   /* USER CODE END USART3_4_IRQn 0 */
-	HAL_UART_IRQHandler(&huart3);
+  HAL_UART_IRQHandler(&huart3);
   /* USER CODE BEGIN USART3_4_IRQn 1 */
 	HAL_UART_Receive_IT(&huart3,&buffer,1);
 	portYIELD_FROM_ISR(higher_priority_task_woken);

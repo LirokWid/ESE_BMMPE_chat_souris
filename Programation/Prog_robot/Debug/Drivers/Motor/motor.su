@@ -1,0 +1,11 @@
+../Drivers/Motor/motor.c:25:6:test1	8	static
+../Drivers/Motor/motor.c:36:6:Start_motor_Tasks	24	static
+../Drivers/Motor/motor.c:42:6:forward_mode	32	static
+../Drivers/Motor/motor.c:50:6:reverse_mode	32	static
+../Drivers/Motor/motor.c:58:6:standBy_mode	32	static
+../Drivers/Motor/motor.c:64:6:brake_mode	32	static
+../Drivers/Motor/motor.c:70:6:set_speed	32	static
+../Drivers/Motor/motor.c:78:6:move_on_curve_left	48	static
+../Drivers/Motor/motor.c:87:6:move_on_curve_right	40	static
+../Drivers/Motor/motor.c:96:6:move_straight	24	static
+../Drivers/Motor/motor.c:102:6:stop	16	static

@@ -3,4 +3,4 @@
 ../Drivers/HC05/tasks_HC05.c:24:6:fill_queue	24	static
 ../Drivers/HC05/tasks_HC05.c:30:6:read_BT	32	static
 ../Drivers/HC05/tasks_HC05.c:38:6:renvoie	32	static
-../Drivers/HC05/tasks_HC05.c:48:6:Start_All_Tasks	32	static
+../Drivers/HC05/tasks_HC05.c:48:6:Start_HC05_Tasks	32	static

@@ -45,7 +45,7 @@ void renvoie(void *pvParameters){
 }
 
 
-void Start_All_Tasks(void) {
+void Start_HC05_Tasks(void) {
 	TaskHandle_t TaskHandle_print_BT;
 	TaskHandle_t TaskHandle_send_text;
 	//TaskHandle_t TaskHandle_read_BT;

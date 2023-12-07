@@ -20,7 +20,7 @@ void send_text(void *pvParameters);
 void fill_queue(QueueHandle_t queue, const char* text);
 void read_BT(void *pvParameters);
 void renvoie(void *pvParameters);
-void Start_All_Tasks(void);
+void Start_HC05_Tasks(void);
 
 
 #endif /* INC_TASKS_HC05_H_ */
