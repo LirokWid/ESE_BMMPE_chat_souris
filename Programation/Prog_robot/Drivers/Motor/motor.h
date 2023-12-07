@@ -40,4 +40,7 @@ void move_on_curve_right(int16_t radius,int16_t speed);
 void move_straight(int16_t speed);
 void stop(void);
 
+void test1(void);
+void test2 (void);
+
 #endif /* MOTOR_MOTOR_H_ */

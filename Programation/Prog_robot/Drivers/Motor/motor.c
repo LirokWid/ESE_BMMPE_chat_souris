@@ -33,9 +33,26 @@ void test1(){
 	}
 }
 
+void test2(){
+	for(int i=0;i<50;i++){
+		move_straight(2*i);
+		vTaskDelay(pdMS_TO_TICKS(1));
+	}
+	vTaskDelay(pdMS_TO_TICKS(2000));
+	for(int i=50;i>-1;i--){
+		move_straight(2*i);
+		vTaskDelay(pdMS_TO_TICKS(1));
+	}
+	stop();
+	vTaskDelay(2000);
+}
+
 void Start_motor_Tasks(){
-	TaskHandle_t TaskHandle_test1;
-	xTaskCreate(test1,"test1",configMINIMAL_STACK_SIZE,NULL,1,&TaskHandle_test1);
+	//TaskHandle_t TaskHandle_test1;
+	TaskHandle_t TaskHandle_test2;
+
+	//xTaskCreate(test1,"test1",configMINIMAL_STACK_SIZE,NULL,1,&TaskHandle_test1);
+	xTaskCreate((void*)test2,"test2",configMINIMAL_STACK_SIZE,NULL,1,&TaskHandle_test2);
 }
 // fonctions de bas niveau
 
