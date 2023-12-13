@@ -1,0 +1,10 @@
+10:12:26 **** Incremental Build of configuration Debug for project Prog_robot_lidar_freeRTOS ****
+make -j12 all 
+arm-none-eabi-size  Prog_robot_lidar_freeRTOS.elf 
+   text	   data	    bss	    dec	    hex	filename
+  25596	    116	  34100	  59812	   e9a4	Prog_robot_lidar_freeRTOS.elf
+Finished building: default.size.stdout
+ 
+
+10:12:26 Build Finished. 0 errors, 0 warnings. (took 386ms)
+

@@ -1,0 +1,7 @@
+#pragma once
+
+
+//Reprogram the printf function to HAL_uart transmit on uart1
+#include "printf_uart.h"
+
+

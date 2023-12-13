@@ -1,0 +1,29 @@
+#include "lidar_task.h"
+
+TaskHandle_t 		TaskHandle_LIDAR;
+UART_HandleTypeDef * lidar_uart_handle;
+
+
+int Init_lidar(int priority, UART_HandleTypeDef lidar_uart){
+
+	lidar_uart_handle = lidar_uart;
+
+
+	//We need to configure and start the DMA
+
+
+	//Then create the main task
+	BaseType_t xReturned =	xTaskCreate(
+								Mpu6050_Task,
+								"accel_gyro_Task",
+								configMINIMAL_STACK_SIZE,
+								NULL,
+								priority,
+								&TaskHandle_MPU6050
+							);
+	return xReturned;
+}
+
+void Lidar_Task(void *pvParameters){
+
+}

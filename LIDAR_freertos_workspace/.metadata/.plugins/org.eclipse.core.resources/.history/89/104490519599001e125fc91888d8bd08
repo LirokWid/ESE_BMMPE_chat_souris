@@ -1,0 +1,19 @@
+#include "printf_uart.h"
+
+/**
+  * @brief  Retargets the C library printf function to the USART.
+  * @param  None
+  * @retval None
+  */
+PUTCHAR_PROTOTYPE
+{
+	int fputc(int ch, FILE *f)
+	{
+	/* Place your implementation of fputc here */
+	/* e.g. write a character to the USART */
+	HAL_UART_Transmit(&DEBUG_UART,(uint8_t*)&ch,1,1);
+	return ch;
+	}
+}
+
+

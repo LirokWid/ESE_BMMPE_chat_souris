@@ -1,0 +1,11 @@
+#ifndef INC_LIDAR_TASK_H_
+#define INC_LIDAR_TASK_H_
+
+#include "lidar_driver.h"
+#include "main.h"
+
+int Init_lidar(int priority, UART_HandleTypeDef lidar_uart);
+void Lidar_Task(void *pvParameters);
+
+
+#endif

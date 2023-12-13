@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;Prog_robot_lidar_freeRTOS/Drivers/TRANSMIT_UART&apos; to &apos;UART&apos;" description="Rename resource &apos;TRANSMIT_UART&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="Drivers/TRANSMIT_UART" name="UART" stamp="1702455651235" updateReferences="true"/>
+</session>
