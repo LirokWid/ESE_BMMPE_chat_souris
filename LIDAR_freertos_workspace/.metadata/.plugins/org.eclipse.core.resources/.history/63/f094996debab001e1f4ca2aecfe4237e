@@ -1,0 +1,47 @@
+#include "lidar_task.h"
+
+TaskHandle_t 		TaskHandle_LIDAR;
+SemaphoreHandle_t 	lidar_half_DMA_semaphore = NULL;
+SemaphoreHandle_t   lidar_full_DMA_semaphore = NULL;
+
+UART_HandleTypeDef *lidar_uart_handle;
+h_lidar_t 			lidar;
+
+
+int Init_lidar(int task_priority, UART_HandleTypeDef *lidar_uart)
+{
+	lidar_init_driver(&lidar, lidar_uart);
+	printf("Loading lidar task with priority %d\n\r",task_priority);
+
+	lidar_half_DMA_semaphore = xSemaphoreCreateBinary();
+	lidar_full_DMA_semaphore = xSemaphoreCreateBinary();
+
+	BaseType_t xReturned;
+	xReturned = xTaskCreate(
+			Lidar_ISR_triggered_Task,
+			"Lidar_ISR_trig",
+			5000,
+			NULL,
+			task_priority,
+			&TaskHandle_LIDAR);
+
+    if(xReturned==pdPASS){
+		printf("Task loaded\r\n");
+		return 0;
+	}else{
+		printf("Error loading task\r\n");
+		return 1;
+	}
+}
+
+void Lidar_ISR_triggered_Task(void *unused)
+{
+	printf("Starting lidar ISR task\n\r");
+	for(;;){
+		//If the DMA triggers a mid or full transfer callback, launch the lidar data parsing function
+		xSemaphoreTake(lidar_half_DMA_semaphore,portMAX_DELAY);
+		lidar_parse(&lidar);
+ 	}
+}
+
+

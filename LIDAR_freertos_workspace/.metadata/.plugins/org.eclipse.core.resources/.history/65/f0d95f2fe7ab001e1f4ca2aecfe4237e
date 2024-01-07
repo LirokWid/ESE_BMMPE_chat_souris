@@ -1,0 +1,282 @@
+/*
+ * lidar_driver.c
+ *
+ *  Created on: Oct 5, 2023
+ *      Author: Baptiste
+ */
+#include "lidar_driver.h"
+
+extern SemaphoreHandle_t lidar_full_DMA_semaphore;
+
+
+
+//extern h_lidar_t lidar;
+
+int Lidar_set_motor_speed(int speed)
+{
+	//lidar.motor.speed=speed;
+	//TODO: change lidar motor speed
+	return 0;
+}
+
+int lidar_init_driver(h_lidar_t *lidar,UART_HandleTypeDef *lidar_uart)
+{
+
+	lidar->serial_drv.transmit	= Lidar_uart_transmit;//Tx
+	lidar->serial_drv.receive	= Lidar_uart_receive; //Rx functions in UART transmit drivers.
+	lidar->motor.set_speed		= Lidar_set_motor_speed;
+
+
+	lidar->uart = lidar_uart;	//Set lidar uart port (UART2) baudRate 128kBaud/s set in .ioc
+	lidar->is_sending = 0;
+
+	HAL_GPIO_WritePin(
+			LIDAR_MESURE_ENABLE_GPIO_Port,
+			LIDAR_MESURE_ENABLE_Pin,
+			SET);
+	HAL_GPIO_WritePin(
+			LIDAR_MOTOR_ENABLE_GPIO_Port,
+			LIDAR_MOTOR_ENABLE_Pin,
+			SET);
+	lidar->motor.set_speed(100);
+	lidar_stop(lidar);
+	HAL_Delay(1000);
+	lidar->dma_head = 0;
+	lidar->serial_drv.receive(lidar->dma_buffer);//Start receiving in dma mode to the dma buffer
+	lidar->state=WAITING_FOR_HEADER;
+	lidar_scan(lidar);
+	return SUCCESS;
+}
+
+//#define DEBUG_LIDAR
+
+int lidar_parse(h_lidar_t *lidar)
+{
+	//Machine à état de traitement des données du lidar
+	//Il ne faut pas mettre de printf pour que la tâche run le plus vite possible
+	points_sample_t points[POINT_SAMPLES_MAX_NB];
+
+#ifdef DEBUG_LIDAR //Permet le debug des buffers du dma qui se font écraser sinon
+	uint8_t temp_buff[DMA_BUFFER_SIZE];
+	for(int i=0;i<DMA_BUFFER_SIZE;i++)
+	{
+		temp_buff[i]=lidar->dma_buffer[i];
+	}
+
+	uint8_t *ptr_dma = temp_buff;
+#else
+	uint8_t *ptr_dma = lidar->dma_buffer;
+#endif
+
+	int point_nb = 0;
+	for(int i=0;i<DMA_BUFFER_SIZE;i++)
+	{//Parse all the buffer
+
+		if(lidar->dma_head>(DMA_BUFFER_SIZE/2))
+		{//Wait for the end of the data
+			//xSemaphoreTake(lidar_full_DMA_semaphore,portMAX_DELAY);
+		}
+		if(lidar->dma_head>(DMA_BUFFER_SIZE))
+		{//If a frame overflow to the start of the dma
+			lidar->dma_head = lidar->frame.frame_end = (lidar->dma_head+lidar->frame.LSN)-DMA_BUFFER_SIZE;;
+		}
+		//lidar->dma_head++;
+		switch(lidar->state)
+		{
+			case WAITING_FOR_HEADER:	// Find the header start bytes
+				if(ptr_dma[i]==START_BYTE_LOW && ptr_dma[i+1]==START_BYTE_HIGH)
+				{
+					lidar->dma_head=i+2;//Set the head on the frame byte
+					lidar->state=PARSING_TYPE;
+				}
+				break;
+
+			case PARSING_TYPE:
+				lidar->frame.CT=ptr_dma[lidar->dma_head]& 0x1;
+
+				lidar->dma_head++;//next byte
+				lidar->state=PARSING_LENGHT;
+				break;
+
+			case PARSING_LENGHT:
+				lidar->frame.LSN=ptr_dma[lidar->dma_head];
+
+				if((lidar->frame.LSN)+(lidar->dma_head)>DMA_BUFFER_SIZE)
+				{//If the end of the frame circled
+					lidar->frame.frame_end = (lidar->dma_head+lidar->frame.LSN)-DMA_BUFFER_SIZE;
+				}else{
+					lidar->frame.frame_end = lidar->dma_head+lidar->frame.LSN;
+				}
+
+				lidar->dma_head++;
+				lidar->state=PARSING_START_ANGLE;
+				break;
+
+			case PARSING_START_ANGLE:
+				lidar->frame.FSA = (ptr_dma[lidar->dma_head])|(ptr_dma[lidar->dma_head+1]<<8);
+
+				lidar->dma_head++;
+				lidar->dma_head++;
+				lidar->state=PARSING_END_ANGLE;
+				break;
+
+			case PARSING_END_ANGLE:
+				lidar->frame.LSA = (ptr_dma[lidar->dma_head])|(ptr_dma[lidar->dma_head+1]<<8);
+
+				lidar->dma_head++;
+				lidar->dma_head++;
+				lidar->state=PARSING_CHECKSUM;
+				break;
+
+			case PARSING_CHECKSUM:
+				lidar->frame.CS=ptr_dma[lidar->dma_head];
+				lidar->dma_head++;
+				lidar->state=PARSING_DATA;
+				break;
+
+			case PARSING_DATA:
+
+				agregate_points_data(
+						lidar,
+						points,
+						point_nb++,
+						ptr_dma[lidar->dma_head],
+						ptr_dma[lidar->dma_head+1]
+						);
+
+				lidar->dma_head++;
+				lidar->dma_head++;
+				if(lidar->dma_head>lidar->frame.frame_end)
+				{
+					store_points_data(
+							lidar,
+							points,
+							point_nb);
+					point_nb = 0;
+					lidar->state=WAITING_FOR_HEADER;
+				}
+				break;
+		}
+	}
+	return 0;
+}
+
+int find_average_of_cluster(int distances[], int start, int end)
+{
+    uint16_t somme = 0;
+    for (int i = start; i <= end; i++)
+    {
+        somme += distances[i];
+    }
+    return somme / (end - start + 1);
+}
+
+void agregate_points_data(h_lidar_t *lidar,points_sample_t *points, uint8_t point_nb, uint8_t LSB,uint8_t MSB)
+{
+	uint16_t start_angle_undivided = (lidar->frame.FSA>>1);//   /64;
+	uint16_t end_angle_undivided   = (lidar->frame.LSA>>1);//	/64;
+
+
+	lidar->frame.start_angle = start_angle_undivided/64;
+	lidar->frame.end_angle = end_angle_undivided/64;
+	int point_length = (lidar->frame.LSN)-1;
+
+
+	uint16_t angle = 0;
+	uint16_t angle_diff = (end_angle_undivided-start_angle_undivided)/64;
+	if(angle_diff < 0){
+		angle_diff+=360;
+	}
+	angle = start_angle_undivided/64+point_nb*angle_diff/(point_length);
+
+
+	if(angle>360){
+		angle-=360;
+	}
+
+	uint16_t distance = (MSB |(LSB<<8))/4;
+
+	points[point_nb].distance = distance;
+	points[point_nb].angle = angle;
+}
+
+#define ANGLE_SHIFT 90
+
+#define MIN_STORE_DISTANCE 100
+#define MAX_STORE_DISTANCE 2500
+
+
+void store_points_data(h_lidar_t *lidar, points_sample_t *points,uint8_t point_nb)
+{
+	//Round the angle by degree and update the buffer 2D map
+	//	1. Erase old point values for the new points
+	/*
+	for(int i=lidar->frame.start_angle;i<lidar->frame.end_angle;i++)
+	{
+		if(i<=360)
+		{
+			lidar->points[i]= CLEARED_POINT;
+		}else{
+			lidar->points[i-360] = CLEARED_POINT;
+		}
+	}
+	*/
+
+	/*
+	for(int i=0;i<359;i++)
+	{
+		lidar->points[i]=0;
+	}
+	*/
+
+	//	2. Fill the array with the new_values:
+	//Keep the closest point on the same angle because its possible to have two points because of floating values.
+	for(int i=0;i<point_nb;i++)
+	{
+		uint16_t current_angle = points[i].angle;
+        if (current_angle < 360)
+		{
+        	uint16_t store_angle = current_angle + ANGLE_SHIFT;
+
+        	if(store_angle>=360){store_angle-=360;};
+        	if(store_angle<0){store_angle+=360;};
+
+
+        	if((points[i].distance<MIN_STORE_DISTANCE) || (points[i].distance>MAX_STORE_DISTANCE))
+        	{
+        		lidar->points[store_angle] = MAX_STORE_DISTANCE;
+        	}else{
+    			lidar->points[store_angle] = points[i].distance;
+        	}
+		}
+	}
+}
+
+
+int lidar_stop(h_lidar_t * lidar)
+{
+    lidar->cmd = COMMAND_STOP_SCAN;
+    lidar->serial_drv.transmit((uint8_t *)&(lidar->cmd), 2);
+	return 0;
+}
+
+int lidar_info(h_lidar_t * lidar)
+{
+    lidar->cmd = COMMAND_GET_ID;
+    lidar->serial_drv.transmit((uint8_t *)&(lidar->cmd), 2);
+	return 0;
+}
+
+int lidar_scan(h_lidar_t * lidar)
+{
+    lidar->cmd = COMMAND_START_SCAN;
+    lidar->serial_drv.transmit((uint8_t *)&(lidar->cmd), 2);
+	return 0;
+}
+
+int lidar_restart(h_lidar_t * lidar)
+{
+    lidar->cmd = COMMAND_SOFT_RESTART;
+    lidar->serial_drv.transmit((uint8_t *)&(lidar->cmd), 2);
+	return 0;
+}

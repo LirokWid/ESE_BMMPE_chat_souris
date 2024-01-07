@@ -1,10 +1,17 @@
-10:12:26 **** Incremental Build of configuration Debug for project Prog_robot_lidar_freeRTOS ****
+15:57:13 **** Incremental Build of configuration Debug for project Prog_robot_lidar_freeRTOS ****
 make -j12 all 
+arm-none-eabi-gcc "../Drivers/LIDAR/lidar_task.c" -mcpu=cortex-m0plus -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G070xx -c -I../Core/Inc -I../Drivers/STM32G0xx_HAL_Driver/Inc -I../Drivers/STM32G0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G0xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM0 -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/LIDAR/lidar_task.d" -MT"Drivers/LIDAR/lidar_task.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Drivers/LIDAR/lidar_task.o"
+arm-none-eabi-gcc -o "Prog_robot_lidar_freeRTOS.elf" @"objects.list"   -mcpu=cortex-m0plus -T"C:\Users\Baptiste\Documents\ENSEA\3A\Projet chat-souris\FreeRTOS\Prog_robot_lidar_isole\STM32G070RBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Prog_robot_lidar_freeRTOS.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Prog_robot_lidar_freeRTOS.elf
+ 
 arm-none-eabi-size  Prog_robot_lidar_freeRTOS.elf 
+arm-none-eabi-objdump -h -S Prog_robot_lidar_freeRTOS.elf  > "Prog_robot_lidar_freeRTOS.list"
    text	   data	    bss	    dec	    hex	filename
-  25596	    116	  34100	  59812	   e9a4	Prog_robot_lidar_freeRTOS.elf
+  37432	    116	  26076	  63624	   f888	Prog_robot_lidar_freeRTOS.elf
 Finished building: default.size.stdout
  
+Finished building: Prog_robot_lidar_freeRTOS.list
+ 
 
-10:12:26 Build Finished. 0 errors, 0 warnings. (took 386ms)
+15:57:15 Build Finished. 0 errors, 0 warnings. (took 1s.221ms)
 

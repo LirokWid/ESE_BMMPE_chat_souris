@@ -1,0 +1,17 @@
+#ifndef INC_LIDAR_TASK_H_
+#define INC_LIDAR_TASK_H_
+
+#include "../UART/transmit_uart.h"
+#include "lidar_driver.h"
+
+#include "cmsis_os.h"
+
+#define LIDAR_POINTS_SENSIBILITY 360
+#define MOVING_AVERAGE_DEPTH 5
+
+int Init_lidar(int task_priority, UART_HandleTypeDef *lidar_uart);
+void Lidar_ISR_triggered_Task(void *pvParameters);
+void Lidar_find_target(void *pvParameters);
+
+
+#endif

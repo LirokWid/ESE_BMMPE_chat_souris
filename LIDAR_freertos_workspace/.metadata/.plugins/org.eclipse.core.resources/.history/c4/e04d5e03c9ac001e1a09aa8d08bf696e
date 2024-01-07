@@ -1,0 +1,121 @@
+#include "lidar_task.h"
+
+TaskHandle_t 		TaskHandle_LIDAR;
+SemaphoreHandle_t 	lidar_half_DMA_semaphore = NULL;
+SemaphoreHandle_t   lidar_full_DMA_semaphore = NULL;
+
+SemaphoreHandle_t   find_target_semaphore = NULL;
+
+
+UART_HandleTypeDef *lidar_uart_handle;
+h_lidar_t 			lidar;
+
+
+int Init_lidar(int task_priority, UART_HandleTypeDef *lidar_uart)
+{
+	BaseType_t xReturned;
+
+	lidar_init_driver(&lidar, lidar_uart);
+	printf("Loading lidar task with priority %d\n\r",task_priority);
+
+	lidar_half_DMA_semaphore = xSemaphoreCreateBinary();
+	lidar_full_DMA_semaphore = xSemaphoreCreateBinary();
+
+	xReturned = xTaskCreate(
+			Lidar_ISR_triggered_Task,
+			"Lidar_ISR_trig",
+			5000,
+			NULL,
+			task_priority,
+			&TaskHandle_LIDAR);
+
+    if(xReturned==pdPASS){
+		printf("Task loaded\r\n");
+	}else{
+		printf("Error loading task\r\n");
+	}
+
+	printf("Loading Lidar_find_target task with priority %d\n\r",task_priority-1);
+
+	find_target_semaphore = xSemaphoreCreateBinary();
+
+	xReturned = xTaskCreate(
+			Lidar_find_target,
+			"Lidar_find_target",
+			100,
+			NULL,
+			task_priority-1,
+			&TaskHandle_LIDAR);
+
+    if(xReturned==pdPASS){
+		printf("Task loaded\r\n");
+	}else{
+		printf("Error loading task\r\n");
+	}
+	return 0;
+
+}
+
+void Lidar_find_target(void *unused)
+{
+	printf("Starting Lidar_find_target ISR task\n\r");
+	uint16_t averaged_values[LIDAR_POINTS_SENSIBILITY];
+	uint16_t circular_buffer[MOVING_AVERAGE_DEPTH][LIDAR_POINTS_SENSIBILITY];
+	static uint8_t buffer_index = 0;
+
+	for(;;){
+
+		//Average the 2d map over x times,
+		xSemaphoreTake(find_target_semaphore,portMAX_DELAY);
+		// Copy the latest Lidar values to the circular buffer
+		for (int i = 0; i < LIDAR_POINTS_SENSIBILITY; ++i)
+		{
+			circular_buffer[buffer_index][i] = lidar.points[i];
+		}
+
+		// Update the buffer index for the next iteration
+		buffer_index = (buffer_index + 1) % MOVING_AVERAGE_DEPTH;
+
+		// Calculate the moving average
+		for (int i = 0; i < LIDAR_POINTS_SENSIBILITY; ++i)
+		{
+			averaged_values[i] = 0;
+			for (int j = 0; j < MOVING_AVERAGE_DEPTH; ++j)
+			{
+				averaged_values[i] += circular_buffer[j][i];
+			}
+			averaged_values[i] /= MOVING_AVERAGE_DEPTH;
+		}
+		/*
+		uint16_t min = 10000;
+		uint16_t angle;
+		for(int i = 0;i<360;i++)
+		{
+			uint16_t current_dist = lidar.points[i];
+			if(current_dist > 0)
+			{
+				if(min>current_dist)
+				{
+					min = current_dist;
+					angle = i;
+				}
+			}
+		}
+		lidar.target.distance = min;
+		lidar.target.angle = angle;
+		*/
+	}
+}
+
+
+void Lidar_ISR_triggered_Task(void *unused)
+{
+	printf("Starting lidar ISR task\n\r");
+	for(;;){
+		//If the DMA triggers a mid or full transfer callback, launch the lidar data parsing function
+		xSemaphoreTake(lidar_half_DMA_semaphore,portMAX_DELAY);
+		lidar_parse(&lidar);
+ 	}
+}
+
+

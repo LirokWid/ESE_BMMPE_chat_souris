@@ -1,0 +1,88 @@
+/*
+ * bordure_bumper.c
+ *
+ *  Created on: Dec 6, 2023
+ *      Author: maxim
+ */
+
+#include "stdio.h"
+#include "capt_btn.h"
+#include "cmsis_os.h"
+
+uint16_t GPIO_Pin_mem;
+struct CAPT_BTN_MAP_struct CAPT_BTN_MAP;
+const struct CAPT_BTN_MAP_struct CAPT_BTN_MAP_RESET = {NONE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE};
+
+TaskHandle_t TaskHandle_CAPT_BTN;
+SemaphoreHandle_t sem_capt1 = NULL;
+
+void capt_btn_task() {
+	for	(;;) {
+
+		xSemaphoreTake(sem_capt1, portMAX_DELAY);
+		switch (GPIO_Pin_mem)
+		{
+			case BUMPER_1_Pin 	: CAPT_BTN_MAP.BUMPER_1 = TRUE; CAPT_BTN_MAP.Pressed = BUMPER; break;
+			case BUMPER_2_Pin 	: CAPT_BTN_MAP.BUMPER_2 = TRUE; CAPT_BTN_MAP.Pressed = BUMPER; break;
+			case BUMPER_3_Pin 	: CAPT_BTN_MAP.BUMPER_3 = TRUE; CAPT_BTN_MAP.Pressed = BUMPER; break;
+			case BUMPER_4_Pin 	: CAPT_BTN_MAP.BUMPER_4 = TRUE; CAPT_BTN_MAP.Pressed = BUMPER; break;
+			case BTN_1_Pin 		: CAPT_BTN_MAP.BTN_1 = TRUE;CAPT_BTN_MAP.Pressed = BTN; break;
+			case BTN_2_Pin 		: CAPT_BTN_MAP.BTN_2 = TRUE;CAPT_BTN_MAP.Pressed = BTN; break;
+			case BTN_3_Pin 		: CAPT_BTN_MAP.BTN_3 = TRUE;CAPT_BTN_MAP.Pressed = BTN; break;
+			case BORDURE_1_Pin 	: CAPT_BTN_MAP.BORDURE_1 = TRUE;CAPT_BTN_MAP.Pressed = BORDURE; break;
+			case BORDURE_2_Pin 	: CAPT_BTN_MAP.BORDURE_2 = TRUE;CAPT_BTN_MAP.Pressed = BORDURE; break;
+			//case BORDURE_3_Pin : CAPT_BTN_MAP.BORDURE_3 = TRUE; break;
+		}
+
+		if(CAPT_BTN_MAP.Pressed != NONE) HAL_GPIO_TogglePin(LED_ERROR_GPIO_Port, LED_ERROR_Pin);
+
+		CAPT_BTN_MAP = CAPT_BTN_MAP_RESET;
+	}
+}
+
+int capt_btn_init(int priority)
+{
+	sem_capt1 = xSemaphoreCreateBinary();
+	BaseType_t xReturned;
+
+	printf("Loading btn_ISR task with priority %d\n\r",priority);
+
+	xReturned = xTaskCreate(
+					capt_btn_task,
+					"capt_btn_task",
+					500,
+					NULL,
+					priority,
+					&TaskHandle_CAPT_BTN);
+
+	if(xReturned==pdPASS){
+		printf("Task loaded\r\n");
+		return 0;
+	}
+	else {
+		printf("Error loading task\r\n");
+		return 1;
+	}
+}
+
+void HAL_GPIO_EXTI_Rising_Callback(uint16_t GPIO_Pin)
+{
+	/*
+}
+	BaseType_t higher_priority_task_woken = pdFALSE;
+	GPIO_Pin_mem = GPIO_Pin;
+	//capt_btn_task();
+	xSemaphoreGiveFromISR(sem_capt1, &higher_priority_task_woken);
+	portYIELD_FROM_ISR(higher_priority_task_woken);
+	*/
+}
+
+void HAL_GPIO_EXTI_Falling_Callback(uint16_t GPIO_Pin)
+{
+	BaseType_t higher_priority_task_woken = pdFALSE;
+	GPIO_Pin_mem = GPIO_Pin;
+	//capt_btn_task();
+	xSemaphoreGiveFromISR(sem_capt1, &higher_priority_task_woken);
+	portYIELD_FROM_ISR(higher_priority_task_woken);
+}
+
