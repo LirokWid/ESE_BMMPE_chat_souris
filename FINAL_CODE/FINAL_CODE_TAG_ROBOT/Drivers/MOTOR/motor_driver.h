@@ -21,12 +21,9 @@
 #define MAX_ROT_SPEED 245
 
 #define ARR_VALUE 100
-
 #define SPEED_TEST_VALUE 75
 
 #define CONSTRAIN(value, min, max) ((value) < (min) ? (min) : ((value) > (max) ? (max) : (value)))
-
-
 
 typedef struct motor{
 	TIM_HandleTypeDef *forward_htim;

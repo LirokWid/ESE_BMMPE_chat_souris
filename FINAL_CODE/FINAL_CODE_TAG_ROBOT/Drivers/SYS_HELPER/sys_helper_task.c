@@ -55,8 +55,8 @@ void is_system_alive(void *unused)
 
 #define USE_AVERAGE_POINTS
 #define USE_POINTS
-//#define PRINT_LIDAR_2D_MAP
-//#define PRINT_TARGET_COORDINATES
+#define PRINT_LIDAR_2D_MAP
+#define PRINT_TARGET_COORDINATES
 
 void print_lidar_point(void *unused)
 {

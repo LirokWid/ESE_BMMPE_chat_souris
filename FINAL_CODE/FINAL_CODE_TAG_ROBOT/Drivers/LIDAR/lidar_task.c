@@ -75,8 +75,8 @@ void Lidar_compute_average_Task(void *unused)
 			for(int j=0; j< POINTS_PER_AVERAGE;j++)
 			{
 				if(
-(circular_buffer[buffer_index_min1][i]==lidar.points[(i*POINTS_PER_AVERAGE)+j]) ||
-(lidar.points[(i*POINTS_PER_AVERAGE)+j]<10)											   )
+				(circular_buffer[buffer_index_min1][i]==lidar.points[(i*POINTS_PER_AVERAGE)+j]) ||
+				(lidar.points[(i*POINTS_PER_AVERAGE)+j]<10)											   )
 				{
 					circular_buffer[buffer_index][i] += 2500;
 				}else{

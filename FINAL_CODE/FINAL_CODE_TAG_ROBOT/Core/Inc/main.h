@@ -81,9 +81,6 @@ void Error_Handler(void);
 #define BUMPER_4_Pin GPIO_PIN_14
 #define BUMPER_4_GPIO_Port GPIOB
 #define BUMPER_4_EXTI_IRQn EXTI4_15_IRQn
-#define BORDURE_3_Pin GPIO_PIN_15
-#define BORDURE_3_GPIO_Port GPIOB
-#define BORDURE_3_EXTI_IRQn EXTI4_15_IRQn
 #define ENCODER_1_B_Pin GPIO_PIN_8
 #define ENCODER_1_B_GPIO_Port GPIOA
 #define ENCODER_1_A_Pin GPIO_PIN_9

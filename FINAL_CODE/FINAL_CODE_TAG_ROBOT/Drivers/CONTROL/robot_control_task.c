@@ -4,6 +4,7 @@ TaskHandle_t TaskHandle_robot_ctrl;
 
 extern h_lidar_t lidar;
 
+robot_state_t robot;
 
 int robot_control_init(int task_priority)
 {
@@ -30,63 +31,85 @@ int robot_control_init(int task_priority)
 void robot_control_Task(void *unused)
 {
 	printf("Starting robot_control task\r\n");
-	robot_state_t state = CAT;
 	motor_t L_motor;
 	motor_t R_motor;
 	init_motors(&L_motor, &R_motor);
-/*
-	for(int i = 0;i<100;i++)
-	{
-		forward_mode(i, &L_motor);
-		vTaskDelay(50);
-	}
 
-	for(int i = 0;i<100;i++)
-	{
-		forward_mode(i, &R_motor);
-		vTaskDelay(50);
-	}
-	*/
-
-	vTaskDelay(2000);
 
 	standby_mode(&L_motor);
 	standby_mode(&R_motor);
 
-	//vTaskDelete(0);
-
 	for(;;)
 	{
-		switch(state){
+		switch(robot.mode){
 		case IDLE:
-			//Wait for a button press to start tracking
-			break;
-		case CAT:
-			//hunt_enemy();
-			uint16_t angle = lidar.target.angle;
+			vTaskDelay(pdMS_TO_TICKS(DELAY_UNTIL_MOTOR_START));
+			robot.type = STARTING_MODE;
+			robot.mode = TRACKING;
 
-			int16_t angle_diff;
-
-			if(angle<180)
+		case TRACKING:
+			if(robot.type == CAT)
 			{
-				angle_diff = angle;
+				hunt_enemy(&L_motor, &R_motor);
 			}else{
-				angle_diff = -(angle-180);
+				avoid_enemy(&L_motor, &R_motor);
 			}
-			angle_diff/=2;
-			set_speed(constrain(angle_diff,-35,35), &L_motor);
-			set_speed(constrain(-angle_diff,-35,35), &R_motor);
 			break;
-		case MOUSE:
-			break;
+
 		case AVOID_EDGE:
+
+			control_set_speed(-AVOID_BACKWARD_SPEED, &L_motor, &R_motor);
+
+			vTaskDelay(pdMS_TO_TICKS(AVOID_BACKWARD_TIME));
+			control_set_rotate(AVOID_ROTATION_SPEED,&L_motor, &R_motor);
+			vTaskDelay(pdMS_TO_TICKS(AVOID_ROTATION_TIME));
+			standby_mode(&L_motor);
+			standby_mode(&R_motor);
+
+			robot.mode = TRACKING;
 			break;
 		}
-		//vTaskDelay(pdMS_TO_TICKS(1000));
 	}
 }
 
-int16_t constrain(int16_t value, int8_t min, int8_t max)
+void control_set_speed_line_rotate(int16_t command,motor_t *L_motor, motor_t *R_motor)
+{
+#ifdef USE_MOTORS
+	int16_t speed_L, speed_R;
+
+	speed_L = constrain(command+FORWARD_SPEED,MAX_SPEED_FWD,-MAX_SPEED_REV);//rotation calculation
+	speed_R = -constrain(command+FORWARD_SPEED,MAX_SPEED_FWD,-MAX_SPEED_REV);//rotation calculation
+	set_speed(speed_L, L_motor);
+	set_speed(speed_R, R_motor);
+#endif
+}
+void control_set_rotate(int16_t command,motor_t *L_motor, motor_t *R_motor)
+{
+#ifdef USE_MOTORS
+	set_speed(command, L_motor);
+	set_speed(command, R_motor);
+#endif
+}
+
+void control_set_speed_line(int16_t command,motor_t *L_motor, motor_t *R_motor)
+{
+#ifdef USE_MOTORS
+	int16_t speed;
+	speed = constrain(command,MAX_SPEED_FWD,-MAX_SPEED_REV);
+	set_speed(speed, L_motor);
+	set_speed(-speed, R_motor);
+#endif
+}
+void control_set_speed(int16_t command,motor_t *L_motor, motor_t *R_motor)
+{
+#ifdef USE_MOTORS
+	int16_t speed;
+	speed = command;
+	set_speed(speed, L_motor);
+	set_speed(speed, R_motor);
+#endif
+}
+int16_t constrain(int16_t value, int8_t max, int8_t min)
 {
 	if(value<min)
 	{
@@ -98,9 +121,45 @@ int16_t constrain(int16_t value, int8_t min, int8_t max)
 	}
 	return value;
 }
+int16_t get_oposite_angle_360(int16_t angle)
+{
+	angle+=180;
+	if(angle>360)
+	{
+		return angle-360;
+	}else{
+		return angle;
+	}
+}
 
-void hunt_enemy()
+void hunt_enemy(motor_t *L_motor, motor_t *R_motor)
 {
 	//Get the target angle deviation
+	uint16_t angle = lidar.target.angle;
+	int16_t angle_diff;
 
+	/* Angle dif :
+	 * max +180
+	 * min -180
+	 * Map this to +100 -100 with an attenuation
+	 */
+	angle_diff = map_360_0_to_100_min100(angle);
+	angle_diff /= ATTENUATION_FACTOR;
+	control_set_speed_line_rotate(angle_diff,L_motor,R_motor);
+}
+
+int16_t map_360_0_to_100_min100(int16_t x)
+{
+	const int16_t in_max = 360;
+	const int16_t out_min = -100;
+	const int16_t out_max = 100;
+	return x * (out_max - out_min) / in_max + out_min;
+}
+void avoid_enemy(motor_t *L_motor, motor_t *R_motor)
+{
+	uint16_t angle = get_oposite_angle_360(lidar.target.angle);
+	int16_t angle_diff;
+	angle_diff = map_360_0_to_100_min100(angle);
+	angle_diff /= ATTENUATION_FACTOR;
+	control_set_speed_line_rotate(angle_diff,L_motor,R_motor);
 }

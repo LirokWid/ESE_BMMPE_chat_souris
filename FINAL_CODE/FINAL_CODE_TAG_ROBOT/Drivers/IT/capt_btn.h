@@ -8,8 +8,10 @@
 #ifndef IT_CAPT_BTN_H_
 #define IT_CAPT_BTN_H_
 
-#include<main.h>
-
+#include <main.h>
+#include <stdio.h>
+#include "cmsis_os.h"
+#include "../CONTROL/robot_control_task.h"
 
 
 enum BOOL {FALSE, TRUE};

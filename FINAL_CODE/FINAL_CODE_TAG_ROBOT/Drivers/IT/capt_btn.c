@@ -5,9 +5,8 @@
  *      Author: maxim
  */
 
-#include "stdio.h"
 #include "capt_btn.h"
-#include "cmsis_os.h"
+
 
 uint16_t GPIO_Pin_mem;
 struct CAPT_BTN_MAP_struct CAPT_BTN_MAP;
@@ -15,6 +14,9 @@ const struct CAPT_BTN_MAP_struct CAPT_BTN_MAP_RESET = {NONE, FALSE, FALSE, FALSE
 
 TaskHandle_t TaskHandle_CAPT_BTN;
 SemaphoreHandle_t sem_capt1 = NULL;
+
+extern robot_state_t robot;
+
 
 void capt_btn_task() {
 	for	(;;) {
@@ -35,6 +37,14 @@ void capt_btn_task() {
 		}
 
 		if(CAPT_BTN_MAP.Pressed != NONE) HAL_GPIO_TogglePin(LED_ERROR_GPIO_Port, LED_ERROR_Pin);
+		if(CAPT_BTN_MAP.Pressed == BORDURE)
+		{
+			robot.mode = AVOID_EDGE;
+		}
+		if(CAPT_BTN_MAP.Pressed == BUMPER)
+		{
+			robot.type=(robot.type==CAT)?MOUSE:CAT;
+		}
 
 		CAPT_BTN_MAP = CAPT_BTN_MAP_RESET;
 	}
@@ -67,14 +77,12 @@ int capt_btn_init(int priority)
 
 void HAL_GPIO_EXTI_Rising_Callback(uint16_t GPIO_Pin)
 {
-	/*
-}
+
 	BaseType_t higher_priority_task_woken = pdFALSE;
 	GPIO_Pin_mem = GPIO_Pin;
 	//capt_btn_task();
 	xSemaphoreGiveFromISR(sem_capt1, &higher_priority_task_woken);
 	portYIELD_FROM_ISR(higher_priority_task_woken);
-	*/
 }
 
 void HAL_GPIO_EXTI_Falling_Callback(uint16_t GPIO_Pin)

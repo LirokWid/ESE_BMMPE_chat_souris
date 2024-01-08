@@ -3,6 +3,9 @@ int degrees_nb = 360;
 int averageDataSize = 60;
 int smpl_per_average = degrees_nb/averageDataSize;
 
+int target_angle;
+int target_distance; 
+
 
 int[] lidarData = new int[360];
 int[] averageData = new int[averageDataSize];  // Array to store new data
@@ -48,19 +51,23 @@ void processData(String data) {
     if (parts.length == 2) {
       String label = parts[0].trim();
       int distance = Integer.parseInt(parts[1].trim());
-
       if (label.startsWith("A")) {
         int index = Integer.parseInt(label.substring(1));
         averageData[index] = distance;
         println("(A" + index + "):" + distance);
-
       } else if (label.startsWith("S")) {
         int index = Integer.parseInt(label.substring(1));
         lidarData[index] = distance;
         //println("(S" + index + "):" + distance);
+      } else if (label.startsWith("TA")) {
+        target_angle = distance;
+        println("(TA):" + target_angle);
+      } else if (label.startsWith("TD")) {
+        target_distance = distance;
+        println("(TD):" + target_distance);
       }
-    }
   }
+}
 }
 
 void updateScaleFactor() {
@@ -72,8 +79,14 @@ void drawLidar() {
   translate(width / 2, height / 2);
   scale(scaleFactor);
   stroke(0);
+  drawPoints();
+  drawAverage();
+  drawTarget();
+  noFill();  // Reset fill to default
+}
+
+void drawPoints(){
   strokeWeight(5 / scaleFactor);
-  
   for (int i = 0; i < lidarData.length; i++) {
     float angle = radians(i);
     float x = lidarData[i] * cos(angle);
@@ -82,7 +95,8 @@ void drawLidar() {
       point(x, y);
     }
   }
-  
+}
+void drawAverage(){
   strokeWeight(1);
   fill(255, 0, 0);  // Red color
   for (int i = 0; i < averageData.length; i++) {
@@ -93,7 +107,17 @@ void drawLidar() {
       ellipse(x, y, 30, 30);  // Adjust size as needed
     }
   }
-  noFill();  // Reset fill to default
+}
+void drawTarget(){
+  stroke(2);
+  strokeWeight(2);
+  fill(0, 255, 0);  // Red color
+  float angle = radians(target_angle);
+  float x = target_distance * cos(angle);
+  float y = target_distance * sin(angle);
+  line(-width*2, y, width*2, y);
+  // Draw vertical line
+  line(x, -height*2, x, height*2);  // Draw vertical line
 }
 
 
