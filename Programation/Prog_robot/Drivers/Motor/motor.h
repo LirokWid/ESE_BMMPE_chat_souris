@@ -9,13 +9,14 @@
 #define MOTOR_MOTOR_H_
 
 #include <stdint.h>
+#include <math.h>
 #include "stm32g0xx_hal.h"
 #include "cmsis_os.h"
 
 #define WHEELBASE 163 //in mm
 #define WHEEL_DIAMETER 40 //in mm
 #define MAX_COMPTEUR 127
-#define MAX_SPEED 100 // tour/s //à confirmé
+#define MAX_SPEED 245 // tour/s //à confirmé
 
 
 extern TIM_HandleTypeDef htim15;
@@ -39,6 +40,8 @@ void move_on_curve_left(int16_t radius,int16_t speed);
 void move_on_curve_right(int16_t radius,int16_t speed);
 void move_straight(int16_t speed);
 void stop(void);
+
+float drv_sigmoide(int32_t alpha_lidar);
 
 void test1(void);
 void test2 (void);

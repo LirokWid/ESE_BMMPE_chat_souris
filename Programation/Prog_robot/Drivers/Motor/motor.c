@@ -8,6 +8,14 @@
 #include "motor.h"
 #include "stm32g0xx_hal_tim.h"
 
+//variables à recupérer ailleur
+int32_t angle_lidar=0;
+int32_t distance_lidar=0;
+int32_t angle_giro=0;
+
+char capt_bord_AV=0;
+char capt_bord_AR=0;
+
 struct driver_motor_t left_motor={
 		.forward_htim=&htim15,
 		.forward_CHANNEL=TIM_CHANNEL_1,
@@ -47,14 +55,29 @@ void test2(){
 	vTaskDelay(2000);
 }
 
+void test3(){
+	move_on_curve_left(1000,50);
+}
+
+void test4(){
+	for(;;){
+		move_straight(60);
+		vTaskDelay(pdMS_TO_TICKS(9000));
+		move_on_curve_left(0,60);
+		vTaskDelay(pdMS_TO_TICKS(2000));
+	}
+}
+
+
 void Start_motor_Tasks(){
 	//TaskHandle_t TaskHandle_test1;
-	TaskHandle_t TaskHandle_test2;
+	TaskHandle_t TaskHandle_test3;
 
 	//xTaskCreate(test1,"test1",configMINIMAL_STACK_SIZE,NULL,1,&TaskHandle_test1);
-	xTaskCreate((void*)test2,"test2",configMINIMAL_STACK_SIZE,NULL,1,&TaskHandle_test2);
+	xTaskCreate((void*)test3,"test3",configMINIMAL_STACK_SIZE,NULL,1,&TaskHandle_test3);
 }
-// fonctions de bas niveau
+
+// fonctions de niveau 0: controle moteur
 
 void forward_mode(uint16_t speed,struct driver_motor_t motor)
 {
@@ -90,7 +113,7 @@ void set_speed(uint16_t speed,struct driver_motor_t motor){
 	else {reverse_mode(-speed,motor);}
 }
 
-//fonctions plus haut niveau
+//fonctions plus niveau 1: courbe simple
 
 void move_on_curve_left(int16_t radius,int16_t speed)
 {
@@ -121,3 +144,30 @@ void stop(void)
 	set_speed(0,right_motor);
 	set_speed(0,left_motor);
 }
+
+//fonctions plus niveau 1: OUI OUI la sigmoïde
+
+float drv_sigmoide(int32_t alpha_lidar){
+	return (alpha_lidar-180)*MAX_SPEED/180;
+	//return -2*exp(alpha_lidar)/(1+exp(alpha_lidar)); //x2 pour avoir un coef entre 0 et -1
+}
+
+void move_sigmoide(int16_t alpha_lidar,int16_t speed)
+{
+	float delta_speed=drv_sigmoide(alpha_lidar);//doit
+	uint16_t speed_R=speed+delta_speed;
+	uint16_t speed_L=speed-delta_speed;
+
+	set_speed(speed_R,right_motor);
+	set_speed(speed_L,left_motor);
+}
+
+//fonctions de niveau 2: trajectoire
+
+int16_t get_raduis(int16_t distance,int16_t angle){//angle in degres
+	int16_t radius=0;
+	radius=distance/(2*cos(90-angle));
+	return radius;
+}
+
+

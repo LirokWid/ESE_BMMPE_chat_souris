@@ -67,7 +67,7 @@ main-build: Prog_robot.elf secondary-outputs
 
 # Tool invocations
 Prog_robot.elf Prog_robot.map: $(OBJS) $(USER_OBJS) C:\Users\vande\OneDrive\Documents\cours\ 3A\projet\ESE_BMMPE_chat_souris\Programation\Prog_robot\STM32G070RBTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "Prog_robot.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m0plus -T"C:\Users\vande\OneDrive\Documents\cours 3A\projet\ESE_BMMPE_chat_souris\Programation\Prog_robot\STM32G070RBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Prog_robot.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+	arm-none-eabi-gcc -o "Prog_robot.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m0plus -T"C:\Users\vande\OneDrive\Documents\cours 3A\projet\ESE_BMMPE_chat_souris\Programation\Prog_robot\STM32G070RBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Prog_robot.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
