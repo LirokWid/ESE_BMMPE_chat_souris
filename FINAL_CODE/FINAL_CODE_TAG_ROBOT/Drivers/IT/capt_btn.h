@@ -12,7 +12,7 @@
 #include <stdio.h>
 #include "cmsis_os.h"
 #include "../CONTROL/robot_control_task.h"
-
+#include "../PARAMS/params.h"
 
 enum BOOL {FALSE, TRUE};
 enum BTN_TYPE {NONE, BUMPER, BTN, BORDURE};

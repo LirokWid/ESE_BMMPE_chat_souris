@@ -31,22 +31,32 @@ int robot_control_init(int task_priority)
 void robot_control_Task(void *unused)
 {
 	printf("Starting robot_control task\r\n");
+	vTaskDelay(pdMS_TO_TICKS(500));
+	if(!lidar.is_sending)
+	{
+		HAL_NVIC_SystemReset();
+	}
 	motor_t L_motor;
 	motor_t R_motor;
 	init_motors(&L_motor, &R_motor);
 
-
-	standby_mode(&L_motor);
-	standby_mode(&R_motor);
+	robot.mode = IDLE;
+	robot.type = STARTING_MODE;
 
 	for(;;)
 	{
+		HAL_GPIO_TogglePin(LED_1_GPIO_Port, LED_1_Pin); //See refresh rate on a led
+		if(robot.type==MOUSE)
+		{
+			HAL_GPIO_WritePin(LED_ERROR_GPIO_Port, LED_ERROR_Pin, SET);
+		}else{
+			HAL_GPIO_WritePin(LED_ERROR_GPIO_Port, LED_ERROR_Pin, RESET);
+		}
 		switch(robot.mode){
 		case IDLE:
-			vTaskDelay(pdMS_TO_TICKS(DELAY_UNTIL_MOTOR_START));
-			robot.type = STARTING_MODE;
-			robot.mode = TRACKING;
-
+			standby_mode(&L_motor);
+			standby_mode(&R_motor);
+			break;
 		case TRACKING:
 			if(robot.type == CAT)
 			{
@@ -57,9 +67,7 @@ void robot_control_Task(void *unused)
 			break;
 
 		case AVOID_EDGE:
-
 			control_set_speed(-AVOID_BACKWARD_SPEED, &L_motor, &R_motor);
-
 			vTaskDelay(pdMS_TO_TICKS(AVOID_BACKWARD_TIME));
 			control_set_rotate(AVOID_ROTATION_SPEED,&L_motor, &R_motor);
 			vTaskDelay(pdMS_TO_TICKS(AVOID_ROTATION_TIME));
@@ -69,16 +77,16 @@ void robot_control_Task(void *unused)
 			robot.mode = TRACKING;
 			break;
 		}
+		vTaskDelay(pdMS_TO_TICKS(50));//Run at 20 Hz
 	}
 }
-
 void control_set_speed_line_rotate(int16_t command,motor_t *L_motor, motor_t *R_motor)
 {
 #ifdef USE_MOTORS
 	int16_t speed_L, speed_R;
 
-	speed_L = constrain(command+FORWARD_SPEED,MAX_SPEED_FWD,-MAX_SPEED_REV);//rotation calculation
-	speed_R = -constrain(command+FORWARD_SPEED,MAX_SPEED_FWD,-MAX_SPEED_REV);//rotation calculation
+	speed_L =  constrain( command+FORWARD_SPEED,MAX_SPEED_FWD,-MAX_SPEED_REV);//rotation calculation
+	speed_R =  constrain(-command+FORWARD_SPEED,MAX_SPEED_FWD,-MAX_SPEED_REV);//rotation calculation
 	set_speed(speed_L, L_motor);
 	set_speed(speed_R, R_motor);
 #endif
@@ -87,10 +95,9 @@ void control_set_rotate(int16_t command,motor_t *L_motor, motor_t *R_motor)
 {
 #ifdef USE_MOTORS
 	set_speed(command, L_motor);
-	set_speed(command, R_motor);
+	set_speed(-command, R_motor);
 #endif
 }
-
 void control_set_speed_line(int16_t command,motor_t *L_motor, motor_t *R_motor)
 {
 #ifdef USE_MOTORS
@@ -131,35 +138,61 @@ int16_t get_oposite_angle_360(int16_t angle)
 		return angle;
 	}
 }
-
 void hunt_enemy(motor_t *L_motor, motor_t *R_motor)
 {
 	//Get the target angle deviation
 	uint16_t angle = lidar.target.angle;
 	int16_t angle_diff;
 
-	/* Angle dif :
-	 * max +180
-	 * min -180
+	/* Angle :
+	 * max +360
+	 * min    0
 	 * Map this to +100 -100 with an attenuation
 	 */
 	angle_diff = map_360_0_to_100_min100(angle);
-	angle_diff /= ATTENUATION_FACTOR;
-	control_set_speed_line_rotate(angle_diff,L_motor,R_motor);
-}
 
-int16_t map_360_0_to_100_min100(int16_t x)
+	int16_t command = attenuate(angle_diff);
+	control_set_speed_line_rotate(constrain(command,MAX_ROTATION_SPEED,-MAX_ROTATION_SPEED),L_motor,R_motor);
+}
+uint16_t attenuate(uint16_t command)
 {
-	const int16_t in_max = 360;
-	const int16_t out_min = -100;
-	const int16_t out_max = 100;
-	return x * (out_max - out_min) / in_max + out_min;
+	/*
+	 * Attenuate the angle difference for half of the command
+	 */
+	if(abs(command)<90 && abs(command)>45)
+	{
+		return (command*3)/2;
+	}
+	if(abs(command)<=45)
+	{
+		return command/2;
+	}
+	return command;
 }
 void avoid_enemy(motor_t *L_motor, motor_t *R_motor)
 {
 	uint16_t angle = get_oposite_angle_360(lidar.target.angle);
 	int16_t angle_diff;
 	angle_diff = map_360_0_to_100_min100(angle);
-	angle_diff /= ATTENUATION_FACTOR;
-	control_set_speed_line_rotate(angle_diff,L_motor,R_motor);
+
+	int16_t command = attenuate(angle_diff);
+	control_set_speed_line_rotate(constrain(command,MAX_ROTATION_SPEED,-MAX_ROTATION_SPEED),L_motor,R_motor);
+}
+int16_t map_360_0_to_100_min100(int16_t x)
+{
+	//map the value between 360 0
+	int16_t temp_val;
+	if(x >= 0 && x<180)
+	{
+		temp_val = x;
+	}else{
+		temp_val = x-360;
+	}
+	//temp val is now =180 to -180
+	//map to 100 -100
+	const int16_t in_min = -180;
+	const int16_t in_max = 180;
+	const int16_t out_min = -100;
+	const int16_t out_max = 100;
+	return (temp_val - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 }

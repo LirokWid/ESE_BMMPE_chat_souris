@@ -106,6 +106,12 @@ void Error_Handler(void);
 #define BTN_3_Pin GPIO_PIN_12
 #define BTN_3_GPIO_Port GPIOA
 #define BTN_3_EXTI_IRQn EXTI4_15_IRQn
+#define LED_3_Pin GPIO_PIN_0
+#define LED_3_GPIO_Port GPIOD
+#define LED_2_Pin GPIO_PIN_5
+#define LED_2_GPIO_Port GPIOD
+#define LED_1_Pin GPIO_PIN_6
+#define LED_1_GPIO_Port GPIOD
 #define MOTOR_2_REV_Pin GPIO_PIN_8
 #define MOTOR_2_REV_GPIO_Port GPIOB
 #define MOTOR_2_FWD_Pin GPIO_PIN_9

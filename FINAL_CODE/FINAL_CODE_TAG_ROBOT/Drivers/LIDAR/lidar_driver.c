@@ -41,7 +41,6 @@ int lidar_init_driver(h_lidar_t *lidar,UART_HandleTypeDef *lidar_uart)
 			SET);
 	lidar->motor.set_speed(100);
 	lidar_stop(lidar);
-	HAL_Delay(1000);
 	lidar->dma_head = 0;
 	lidar->serial_drv.receive(lidar->dma_buffer);//Start receiving in dma mode to the dma buffer
 	lidar->state=WAITING_FOR_HEADER;
@@ -82,6 +81,7 @@ int lidar_parse(h_lidar_t *lidar)
 			case WAITING_FOR_HEADER:	// Find the header start bytes
 				if(ptr_dma[i]==START_BYTE_LOW && ptr_dma[i+1]==START_BYTE_HIGH)
 				{
+					lidar->is_sending = 1;
 					lidar->dma_head=i+2;//Set the head on the frame byte
 					lidar->state=PARSING_TYPE;
 				}else{
@@ -190,7 +190,7 @@ void agregate_points_data(h_lidar_t *lidar,points_sample_t *points, uint8_t poin
 
 }
 
-//#define ANGLE_SHIFT 90
+#define ANGLE_SHIFT 180
 #define MIN_STORE_DISTANCE 100
 #define MAX_STORE_DISTANCE 2500
 
@@ -203,7 +203,6 @@ void store_points_data(h_lidar_t *lidar, points_sample_t *points,uint8_t point_n
 		{
 #ifdef ANGLE_SHIFT
         	current_angle = current_angle + ANGLE_SHIFT;
-
         	if(current_angle>359){current_angle-=360;};
         	if(current_angle<0)	 {current_angle+=360;};
 #endif

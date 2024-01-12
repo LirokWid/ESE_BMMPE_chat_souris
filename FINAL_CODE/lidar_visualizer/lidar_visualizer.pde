@@ -1,4 +1,5 @@
 import processing.serial.*;
+
 int degrees_nb = 360;
 int averageDataSize = 60;
 int smpl_per_average = degrees_nb/averageDataSize;
@@ -19,7 +20,8 @@ void setup() {
   size(1080, 1200);
   initializeLidarData();
   String portName = "COM10";
-  Serial myPort = new Serial(this, portName, 460800);
+  Serial myPort   = new Serial(this, portName      , 460800);
+  //Serial myPort = new Serial(this, Serial.list[1], 460800);
 }
 
 void draw() {

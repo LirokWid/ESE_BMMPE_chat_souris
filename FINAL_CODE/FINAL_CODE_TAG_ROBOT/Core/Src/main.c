@@ -33,6 +33,7 @@
 #include "../../Drivers/IT/capt_btn.h"
 //#include "../../Drivers/MOTOR/motor_driver.h"
 #include "../../Drivers/CONTROL/robot_control_task.h"
+#include "../../Drivers/PARAMS/params.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -84,6 +85,7 @@ void Init_system(){
 void vApplicationStackOverflowHook( TaskHandle_t xTask,signed char *pcTaskName ){
 	printf("Task %s overflowed !",pcTaskName);
 }
+
 /* USER CODE END 0 */
 
 /**
@@ -130,11 +132,14 @@ int main(void)
   Init_system();
   // Create all custom FreeRTOS tasks
 
+  portDISABLE_INTERRUPTS();
   Init_lidar(15,&huart2);
+#ifdef LOG_LIDAR
   create_sys_task(20);
+#endif
   capt_btn_init(25);
   robot_control_init(11);
-
+  portENABLE_INTERRUPTS();
 
 
   printf("!!!!starting scheduler!!!!\r\n");

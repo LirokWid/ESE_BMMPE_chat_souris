@@ -142,7 +142,7 @@ typedef struct h_lidar_struct
 		uint8_t error_code[2];
 	}health;
 
-	int is_sending;
+	uint8_t is_sending;
 
 	lidar_frame_header_t frame;
 	uint8_t  dma_buffer[DMA_BUFFER_SIZE];
@@ -181,9 +181,6 @@ int lidar_restart(h_lidar_t * lidar);
 
 void agregate_points_data(h_lidar_t *lidar,points_sample_t *points, uint8_t point_nb, uint8_t LSB,uint8_t MSB);
 void store_points_data(h_lidar_t *lidar, points_sample_t *points,uint8_t point_nb);
-
-
-
 
 void lidar_set_motor_speed(int speed);
 
