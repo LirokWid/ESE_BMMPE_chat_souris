@@ -32,7 +32,9 @@
 #include "../../Drivers/SYS_HELPER/sys_helper_task.h"
 #include "../../Drivers/IT/capt_btn.h"
 #include "../../Drivers/CONTROL/robot_control_task.h"
+#include "../../Drivers/HC05/HC05_task.h"
 #include "../../Drivers/PARAMS/params.h"
+#include "../../Drivers/MPU6050/mpu6050_task.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -66,18 +68,6 @@ void MX_FREERTOS_Init(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 void Init_system(){
-#ifdef START_ANIMATION
-	const int start_flash_delay_ms = 15;
-	const int nb_flash = 100;
-	HAL_GPIO_WritePin(LED_STATE_GPIO_Port, LED_STATE_Pin,SET);
-	for(int i=0;i<nb_flash;i++){
-		HAL_GPIO_TogglePin(LED_STATE_GPIO_Port, LED_STATE_Pin);
-		HAL_GPIO_TogglePin(LED_ERROR_GPIO_Port, LED_ERROR_Pin);
-		HAL_Delay(start_flash_delay_ms-i+nb_flash);
-	}
-	HAL_GPIO_WritePin(LED_STATE_GPIO_Port, LED_STATE_Pin,RESET);
-	HAL_GPIO_WritePin(LED_ERROR_GPIO_Port, LED_ERROR_Pin,RESET);
-#endif
 	printf("Init System..\r\n");
 }
 

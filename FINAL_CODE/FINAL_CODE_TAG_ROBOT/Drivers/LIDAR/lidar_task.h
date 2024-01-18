@@ -1,3 +1,13 @@
+/**
+ * @file lidar_task.htmlinclude [block] file-name
+ * @author @LirokWid
+ * @brief 
+ * @version 0.1
+ * @date 2024-01-18
+ * 
+ * @copyright Copyright (c) 2024
+ * 
+ */
 #ifndef INC_LIDAR_TASK_H_
 #define INC_LIDAR_TASK_H_
 

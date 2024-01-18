@@ -26,9 +26,11 @@ Les dossiers sont organisés de la manière suivante :
 
 TODO : mettre à jour le contenu des dossiers
 - `CONTROL` :
+- `HC-05` :
 - `IT` :
 - `LIDAR` : 
 - `MOTOR` :
+- `MPU6050` :
 - `PARAMS` :
 - `SYS_HELPER` :
 - `UART` :

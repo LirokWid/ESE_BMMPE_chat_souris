@@ -3,9 +3,7 @@
 TaskHandle_t 		TaskHandle_LIDAR;
 SemaphoreHandle_t 	lidar_half_DMA_semaphore = NULL;
 SemaphoreHandle_t   lidar_full_DMA_semaphore = NULL;
-
 SemaphoreHandle_t   find_target_semaphore = NULL;
-
 
 UART_HandleTypeDef *lidar_uart_handle;
 h_lidar_t 			lidar;
