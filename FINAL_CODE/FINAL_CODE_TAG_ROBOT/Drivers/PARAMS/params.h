@@ -4,8 +4,8 @@
 #define USE_BUTTONS
 #define USE_BUMPERS
 //#define USE_BORDERS
-//#define LOG_LIDAR
-
+#define LOG_LIDAR
+//
 
 
 #endif

@@ -31,7 +31,6 @@
 #include "../../Drivers/LIDAR/lidar_task.h"
 #include "../../Drivers/SYS_HELPER/sys_helper_task.h"
 #include "../../Drivers/IT/capt_btn.h"
-//#include "../../Drivers/MOTOR/motor_driver.h"
 #include "../../Drivers/CONTROL/robot_control_task.h"
 #include "../../Drivers/PARAMS/params.h"
 /* USER CODE END Includes */

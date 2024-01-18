@@ -8,23 +8,6 @@ extern h_lidar_t 			lidar;
 int create_sys_task(int task_priority)
 {
 	BaseType_t xReturned;
-	/*
-	printf("Loading system helper task with priority %d\n\r",task_priority);
-	xReturned = xTaskCreate(
-			is_system_alive,
-			"is_system_alive",
-			500,
-			NULL,
-			task_priority,
-			&TaskHandle_alive);
-
-    if(xReturned==pdPASS){
-		printf("Task loaded\r\n");
-	}else{
-		printf("Error loading task\r\n");
-		return 1;
-	}
-	*/
 
 	printf("Loading lidar printing task with priority %d\n\r",task_priority+1);
 	xReturned = xTaskCreate(
@@ -67,7 +50,7 @@ void print_lidar_point(void *unused)
 #ifdef USE_AVERAGE_POINTS
 			for(int j=0;j<LIDAR_AVERAGE_DIRECTIONS_NB;j++)
 			{
-				printf("A%-3d:%5d|",j,lidar.average[j]);
+				printf("A%-3d:%5lu|",j,lidar.average[j]);
 			}
 			printf("\r\n\n\n");
 #endif
