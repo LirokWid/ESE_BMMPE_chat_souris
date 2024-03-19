@@ -1,6 +1,6 @@
 # ESE_BMMPE_chat_souris
 
-Ce project a pour but de développer un robot qui peut jouer à chat avec d'autres robots, il embarque une carte custom avec un STM32G070. Le projet est développé avec freeRTOS.
+Ce project a pour but de développer un robot qui joue à chat avec d'autres robots, il embarque un PCB custom avec un STM32G070. Le projet est développé avec freeRTOS.
 
 Le pcb permet la connection de :
 - 2 moteurs DC
@@ -13,10 +13,10 @@ Le pcb permet la connection de :
 
 Membres :
 
-- Maxime PICHERY
-- Baptiste RODIER
-- Martina VAN DE MOOSDJIK
-- Paul-Etienne RETAUX
+- M PICHERY
+- B RODIER
+- M VAN DE MOOSDJIK
+- P.-E. RETAUX
 
 
 ## Organisation du code
@@ -24,15 +24,23 @@ Membres :
 Le code fonctionne en modules contenus dans le dossier `drivers`.
 Les dossiers sont organisés de la manière suivante :
 
-TODO : mettre à jour le contenu des dossiers
 - `CONTROL` :
+Gère la logique de contrôle du robot. Il génère les signaux de commande pour les moteurs et les encodeurs.
 - `HC-05` :
+Api de communication avec le module Bluetooth HC-05.
 - `IT` :
+Gère les interruptions du microcontrôleur.
 - `LIDAR` : 
+Routine d'acquisition des données du lidar.
 - `MOTOR` :
+Gère les moteurs et les encodeurs.
 - `MPU6050` :
+Api de communication avec la centrale inertielle MPU6050.
 - `PARAMS` :
+Gère les paramètres du robot.
 - `SYS_HELPER` :
+Fonctions utilitaires pour le système.
 - `UART` :
+Fonctions de communication UART.
 
 
